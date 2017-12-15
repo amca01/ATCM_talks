@@ -22,7 +22,7 @@
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
-<script type="text/javascript" src="file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <meta name="description" content="Org-Reveal Introduction.">
 </head>
 <body>
@@ -32,8 +32,8 @@
 </section>
 
 <section>
-<section id="slide-org25aa844">
-<h2 id="org25aa844">Introduction</h2>
+<section id="slide-org15e0c03">
+<h2 id="org15e0c03">Introduction</h2>
 <ul>
 <li class="fragment roll-in">Carl Gustav Jacobi: "Man muss immer generalisieren": <i>one must always generalize</i></li>
 <li class="fragment roll-in">But generalizing is <i>hard</i></li>
@@ -48,8 +48,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org711a35c">
-<h2 id="org711a35c">Problem 1: crossed ladders</h2>
+<section id="slide-org2801d3a">
+<h2 id="org2801d3a">Problem 1: crossed ladders</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Two ladders of given lengths \(a\) and \(b\) are shown in an alley; the height of
@@ -63,7 +63,7 @@ How wide is the alley?
 <div class="column" style="float:left; width:50%">
 
 <div class="figure">
-<p><img src="./crossed_ladders1.jpg" alt="crossed_ladders1.jpg" height="500px" />
+<p><img src="./Images/crossed_ladders1.jpg" alt="crossed_ladders1.jpg" height="500px" />
 </p>
 </div>
 
@@ -73,8 +73,8 @@ How wide is the alley?
 </section>
 </section>
 <section>
-<section id="slide-orgf57c03f">
-<h2 id="orgf57c03f">Solving the crossed ladders</h2>
+<section id="slide-orgf78ca59">
+<h2 id="orgf78ca59">Solving the crossed ladders</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Introduce some variables, then by similar triangles we find that
@@ -91,7 +91,7 @@ All we have to do now is to turn this into a polynomial equation in \(x\).
 <div class="column" style="float:left; width:50%">
 
 <div class="figure">
-<p><img src="./crossed_ladders2.jpg" alt="crossed_ladders2.jpg" height="500px" />
+<p><img src="./Images/crossed_ladders2.jpg" alt="crossed_ladders2.jpg" height="500px" />
 </p>
 </div>
 
@@ -101,8 +101,8 @@ All we have to do now is to turn this into a polynomial equation in \(x\).
 </section>
 </section>
 <section>
-<section id="slide-org6c40936">
-<h2 id="org6c40936">Crossed ladders with a CAS:</h2>
+<section id="slide-org7de448b">
+<h2 id="org7de448b">Crossed ladders with a CAS:</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >sage: R.&lt;a,b,h,x,A,B,y,z&gt; = PolynomialRing(QQ)
@@ -135,8 +135,8 @@ which is a quartic in \(x^2\).
 </section>
 </section>
 <section>
-<section id="slide-org79e53e9">
-<h2 id="org79e53e9">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
+<section id="slide-org90dd83c">
+<h2 id="org90dd83c">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
 <p>
 We can try  a brute force program to look for values which lead to a polynomial 
 which can be factorized:
@@ -198,8 +198,8 @@ We can obtain \(x\) from \(u\).
 </section>
 </section>
 <section>
-<section id="slide-org0a530f2">
-<h2 id="org0a530f2">Generalizing the crossed ladders problem</h2>
+<section id="slide-orgb9115dc">
+<h2 id="orgb9115dc">Generalizing the crossed ladders problem</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Here is where it starts to get messy.  One simple(?) generalization:
@@ -209,7 +209,7 @@ give the ladders a non-zero width
 <div class="column" style="float:left; width:50%">
 
 <div class="figure">
-<p><img src="./crossed_ladders3.jpg" alt="crossed_ladders3.jpg" height="500px" />
+<p><img src="./Images/crossed_ladders3.jpg" alt="crossed_ladders3.jpg" height="500px" />
 </p>
 </div>
 
@@ -219,8 +219,8 @@ give the ladders a non-zero width
 </section>
 </section>
 <section>
-<section id="slide-org24310d5">
-<h2 id="org24310d5">Starting the solution</h2>
+<section id="slide-org37b02dc">
+<h2 id="org37b02dc">Starting the solution</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 As before, introduce some new variables which can be related by
@@ -230,7 +230,7 @@ similar triangles and Pythagoras' theorem:
 <div class="column" style="float:left; width:50%">
 
 <div class="figure">
-<p><img src="./crossed_ladders4.jpg" alt="crossed_ladders4.jpg" height="500px" />
+<p><img src="./Images/crossed_ladders4.jpg" alt="crossed_ladders4.jpg" height="500px" />
 </p>
 </div>
 
@@ -240,8 +240,8 @@ similar triangles and Pythagoras' theorem:
 </section>
 </section>
 <section>
-<section id="slide-orgad1adf1">
-<h2 id="orgad1adf1">Obtaining the polynomial</h2>
+<section id="slide-orgcd856ed">
+<h2 id="orgcd856ed">Obtaining the polynomial</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >sage: R.&lt;a,b,w,h,x,p,q,r,s,y,z&gt; = PolynomialRing(QQ)
@@ -257,8 +257,8 @@ sage: px = E.gen(0).polynomial(x)
 </section>
 </section>
 <section>
-<section id="slide-org4424937">
-<h2 id="org4424937">This is the polynomial:</h2>
+<section id="slide-orge260fb3">
+<h2 id="orge260fb3">This is the polynomial:</h2>
 <div>
 \begin{array}[l]
 (a^4 b^4 w^2 - 2 a^2 b^2 w^6 + w^{10}) x^{12}\\
@@ -495,8 +495,8 @@ There are 523 (<i>five hundred and twenty three</i>) terms in this polynomial!
 </section>
 </section>
 <section>
-<section id="slide-org5d94982">
-<h2 id="org5d94982">Solving the polynomial</h2>
+<section id="slide-org89cfc1c">
+<h2 id="org89cfc1c">Solving the polynomial</h2>
 <p>
 Or rather, trying to find simple versions of it which can be solved.  
 Can this be done?
@@ -531,8 +531,8 @@ x=17500.
 </section>
 </section>
 <section>
-<section id="slide-orgafc00b5">
-<h2 id="orgafc00b5">Further generalizations and questions</h2>
+<section id="slide-orge22e4f5">
+<h2 id="orge22e4f5">Further generalizations and questions</h2>
 <ul>
 <li class="fragment roll-in">Is there a simple function (like \(u=A+B\)) for which the polynomial is simpler?</li>
 <li class="fragment roll-in">What are the smallest all integer solutions?</li>
@@ -547,8 +547,8 @@ x=17500.
 </section>
 </section>
 <section>
-<section id="slide-org9205b81">
-<h2 id="org9205b81">Problem 2: the ladder in the corner</h2>
+<section id="slide-orgf18fecc">
+<h2 id="orgf18fecc">Problem 2: the ladder in the corner</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Two corridors of different widths \(a\) and \(b\) meet at right angles.
@@ -571,7 +571,7 @@ the two positive axes that passes through \((a,b)\).
 <div class="column" style="float:left; width:50%">
 
 <div class="figure">
-<p><img src="./corner_ladder1.jpg" alt="corner_ladder1.jpg" height="500px" />
+<p><img src="./Images/corner_ladder1.jpg" alt="corner_ladder1.jpg" height="500px" />
 </p>
 </div>
 
@@ -581,15 +581,15 @@ the two positive axes that passes through \((a,b)\).
 </section>
 </section>
 <section>
-<section id="slide-org1d4450f">
-<h2 id="org1d4450f">Solving this problem</h2>
+<section id="slide-org64b100f">
+<h2 id="org64b100f">Solving this problem</h2>
 <p>
 Easy with calculus and a diagram:
 </p>
 
 
 <div class="figure">
-<p><img src="./corner_ladder2.jpg" alt="corner_ladder2.jpg" height="300px" />
+<p><img src="./Images/corner_ladder2.jpg" alt="corner_ladder2.jpg" height="300px" />
 </p>
 </div>
 
@@ -605,8 +605,8 @@ which is
 </section>
 </section>
 <section>
-<section id="slide-org6ea2ca1">
-<h2 id="org6ea2ca1">Generalizing this corner problem</h2>
+<section id="slide-org50c0c83">
+<h2 id="org50c0c83">Generalizing this corner problem</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 As before, consider a non-zero width \(c\).
@@ -639,7 +639,7 @@ A <i>sextic</i> equation, so not in general solvable by radicals.
 <div class="column" style="float:left; width:50%">
 
 <div class="figure">
-<p><img src="./corner_ladder3.jpg" alt="corner_ladder3.jpg" height="500px" />
+<p><img src="./Images/corner_ladder3.jpg" alt="corner_ladder3.jpg" height="500px" />
 </p>
 </div>
 
@@ -649,8 +649,8 @@ A <i>sextic</i> equation, so not in general solvable by radicals.
 </section>
 </section>
 <section>
-<section id="slide-orgf4563bc">
-<h2 id="orgf4563bc">Grappling with a sextic equation</h2>
+<section id="slide-orgdda3973">
+<h2 id="orgdda3973">Grappling with a sextic equation</h2>
 <p>
 Maybe we can find values of \(a\), \(b\), \(c\), for which either
 </p>
@@ -673,8 +673,8 @@ group.  However, this polynomial is irreducible:
 </section>
 </section>
 <section>
-<section id="slide-orga57fec5">
-<h2 id="orga57fec5">Eliminating terms</h2>
+<section id="slide-org17a6bbe">
+<h2 id="org17a6bbe">Eliminating terms</h2>
 <p>
 Recall that to simplify the general cubic equation
 \[
@@ -772,8 +772,8 @@ we get this lovely polynomial:
 </section>
 </section>
 <section>
-<section id="slide-org820a33a">
-<h2 id="org820a33a">Another tack: factorization</h2>
+<section id="slide-org554fd86">
+<h2 id="org554fd86">Another tack: factorization</h2>
 <p>
 Leaving out the gory details:
 </p>
@@ -866,8 +866,8 @@ A triumph for computer algebra and <i>really complicated</i> algebraic expressio
 </section>
 </section>
 <section>
-<section id="slide-orgbde21d2">
-<h2 id="orgbde21d2">Where to from here?</h2>
+<section id="slide-org5179c04">
+<h2 id="org5179c04">Where to from here?</h2>
 <p>
 Further generalizations include:
 </p>
