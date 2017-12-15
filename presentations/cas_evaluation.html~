@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>A framework for evaluating computer algebra systems for mathematics teaching and learning</title>
+<meta name="author" content="(Alasdair McAndrew (export-snippet (:back-end html :value <br><br> :begin 18 :end 35 :post-blank 0 :parent #0)) College of Engineering and Science (export-snippet (:back-end html :value <br> :begin 69 :end 82 :post-blank 0 :parent #0)) Victoria University, (export-snippet (:back-end html :value <br> :begin 102 :end 115 :post-blank 0 :parent #0)) Melbourne, Australia)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="file:///home/amca/Nextcloud/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="file:///home/amca/Nextcloud/reveal.js/css/theme/melbourne.css" id="theme"/>
+
+<link rel="stylesheet" href="file:///home/amca/Nextcloud/reveal.js/lib/styles/gruvbox-dark.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/amca/Nextcloud/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<meta name="description" content="Org-Reveal Introduction.">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">A framework for evaluating computer algebra systems for mathematics teaching and learning</h1><h2 class="author">Alasdair McAndrew<br><br>College of Engineering and Science<br>Victoria University,<br>Melbourne, Australia</h2><h2 class="date">December, 2017</h2>
+</section>
+
+<section>
+<section id="slide-orga77df86">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="orga77df86">Some definitions</h2>
+<ul>
+<li class="fragment roll-in">A <i>computer algebra system</i> or CAS is a computer system which can perform 
+symmbolic, as well as numerical and graphical, operations</li>
+
+<li class="fragment roll-in"><p>
+they can be computer based or handheld
+</p>
+
+<p>
+examples include: Mathematica, Maple, MuPAD (now Matlab Symbolic Toolbox), 
+Macsyma (reborn as GNU Maxima), Axiom, Sage, SymPy, TI-nspire CAS,
+Casio ClassPad, HP Prime, lots of others
+</p></li>
+
+<li class="fragment roll-in">have been used in teaching since their inception</li>
+
+<li class="fragment roll-in">there are two main schools of use:
+
+<ul>
+<li>students must not use a CAS until they have mastered the basics of algebra!</li>
+<li>students should use CAS for experimentation right from the beginning, and
+construct their own understandings</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgaaf3af0">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="orgaaf3af0">Software evaluation: ISO9126</h2>
+<p>
+A generic framework:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Criterion</th>
+<th scope="col" class="org-left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Functionality</td>
+<td class="org-left">how well the software performs its task</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Reliability</td>
+<td class="org-left">fault tolerance and handling of errors);</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Usability</td>
+<td class="org-left">how easy the software is to learn, user interface</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Efficiency</td>
+<td class="org-left">response time and resource management</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Maintainability</td>
+<td class="org-left">fault diagnosis, modifiability, testability</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Portability</td>
+<td class="org-left">environmental flexibility, ease of installation</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Legal complaiance</td>
+<td class="org-left">compliance with laws and regulations</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org4e94d3e">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="org4e94d3e">Software evaluation: ACTIONS</h2>
+<p>
+Designed to evaluation software for distance learning:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Criterion</th>
+<th scope="col" class="org-left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Access</td>
+<td class="org-left">all pretty self-explanatory</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Cost</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Teaching &amp; Learning</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Interactivity and user-friendliness</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Organizational issues</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Novelty</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Speed</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Note:</b> because of huge variability, "teaching and learning is a weak
+discriminator for selecting and using technologies"
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcc96ffc">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="orgcc96ffc">Comparisons</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">ISO 9126</th>
+<th scope="col" class="org-left">ACTIONS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Functionality</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Reliability</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Usability</td>
+<td class="org-left">Interactivity &amp; user-friendliness</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Efficieny</td>
+<td class="org-left">Speed</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Maintainability</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Portability</td>
+<td class="org-left">Access &amp; Cost</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Legal compliance</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Teaching &amp; Learning</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Organizational Issues</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Novelty</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org5f6aeb9">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="org5f6aeb9">A hybrid model: FACTIONS!</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Criterion</th>
+<th scope="col" class="org-left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Functionality, or fitness for purpose</td>
+<td class="org-left">Must manage all mathematics in the course</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Access</td>
+<td class="org-left">by all students, at all times</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Cost</td>
+<td class="org-left">initial purchase, deployment, upkeep, maintenance, licencing&#x2026;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Teaching &amp; Learning</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Interactivity and user-friendliness</td>
+<td class="org-left">Must fit the needs of the <i>students</i> more than the <i>teacher</i></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Organizational issues</td>
+<td class="org-left">Fit in with current policies and practices</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Novelty</td>
+<td class="org-left">Should be seen as something new and exciting</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Students</td>
+<td class="org-left">Different cohorts require difference approaches, and possibly different software</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org16c1f1a">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="org16c1f1a">Case study 1: first year engineering mathematics</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Criterion</th>
+<th scope="col" class="org-right">Matlab</th>
+<th scope="col" class="org-right">CAS Calculator</th>
+<th scope="col" class="org-right">Maple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Functionality, or fitness for purpose</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Access</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Cost</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Teaching &amp; Learning</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Interactivity and user-friendliness</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Organizational issues</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Novelty</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Students</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left"><b>Total</b></td>
+<td class="org-right"><b>15</b></td>
+<td class="org-right"><b>11</b></td>
+<td class="org-right"><b>9</b></td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb557bec">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="orgb557bec">Case study 2: final year cryptography</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-center" />
+
+<col  class="org-center" />
+
+<col  class="org-center" />
+
+<col  class="org-center" />
+
+<col  class="org-center" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Criterion</th>
+<th scope="col" class="org-center">Mathematica</th>
+<th scope="col" class="org-center">Maple</th>
+<th scope="col" class="org-center">GNU Maxima</th>
+<th scope="col" class="org-center">Axiom</th>
+<th scope="col" class="org-center">Sage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Functionality, or fitness for purpose</td>
+<td class="org-center">2</td>
+<td class="org-center">1</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Access</td>
+<td class="org-center">0</td>
+<td class="org-center">0</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Cost</td>
+<td class="org-center">0</td>
+<td class="org-center">0</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Teaching &amp; Learning</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Interactivity and user-friendliness</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">1</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Organizational issues</td>
+<td class="org-center">0</td>
+<td class="org-center">0</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Novelty</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Students</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+<td class="org-center">2</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left"><b>Total</b></td>
+<td class="org-center"><b>10</b></td>
+<td class="org-center"><b>9</b></td>
+<td class="org-center"><b>16</b></td>
+<td class="org-center"><b>15</b></td>
+<td class="org-center"><b>16</b></td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc5169c5">
+<div class="slide-header">Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017</div>
+<h2 id="orgc5169c5">Some final remarks</h2>
+<ul>
+<li class="fragment roll-in">These are not to be construed as definitive</li>
+<li class="fragment roll-in">Your mileage may vary!</li>
+<li class="fragment roll-in">This is offered as a method to help <b>you</b> decide what CAS would best suit 
+<b>your</b> course and <b>your</b> students</li>
+
+<li class="fragment roll-in">Thank you all!</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<p> Created by Alasdair </p>
+<script src="file:///home/amca/Nextcloud/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/amca/Nextcloud/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+minScale: 0.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'None', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/amca/Nextcloud/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'file:///home/amca/Nextcloud/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/amca/Nextcloud/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/amca/Nextcloud/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+]
+});
+</script>
+</body>
+</html>

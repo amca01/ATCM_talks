@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[a4paper,landscape]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[scale=3]
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (0,0) -- (0,1);
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (1,0) -- (1,1) -- ++(120:1);
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (2,0) -- (2,1);
+  \draw[thick] (2,1) -- ++(120:1);
+  \draw[thick] (3,0) -- (3,1) -- ++(120:1);
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (3,1) -- (3,2);
+  \draw[thick] (4,0) -- (4,1) -- ++(120:1);
+  \draw[thick] (4,1) -- (4,2);
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (4,2)-- ++(60:1);
+  \draw[thick] (5,0) -- (5,1) -- ++(120:1);
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (5,1) -- (5,2);
+  \draw[thick] (5,2) -- ++(60:1);
+  \draw[thick] (6,0) -- (6,1) -- ++(120:1);
+  \draw[thick] (6,1) -- (6,2) -- ++(60:1);
+  \draw[thick,-{Triangle[red,angle=60:3mm 3]}] (6,2) -- (6,3);
+  \node[below=2mm] at (0,0) {\Huge\texttt{F[}};
+  \node[below=2mm] at (1,0) {\Huge\texttt{+F}};
+  \node[below=2mm] at (2,0) {\Huge\texttt{]}};
+  \node[below=2mm] at (3,0) {\Huge\texttt{F[}};
+  \node[below=2mm] at (4,0) {\Huge\texttt{-F}};
+  \node[below=2mm] at (5,0) {\Huge\texttt{]}};
+  \node[below=2mm] at (6,0) {\Huge\texttt{F}};
+\end{tikzpicture}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

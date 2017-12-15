@@ -1,0 +1,48 @@
+.reveal p {
+    text-align: left;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+  display: block;
+  text-align: left;
+  margin: 0 0 0 1em; }
+
+.reveal ul li {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    padding: 5px;
+}
+
+.reveal ul ul li {
+    margin-top: 0.25em;
+    margin-bottom: 0.5em;
+    padding: 2.5px;
+}
+
+body {
+    // background-image: url("background-shades.svg");
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h4,
+.reveal h6 {
+    text-transform: uppercase;
+}
+
+h2.author, h2.date {
+    text-transform: none;
+}
+
+.reveal .slides section.title {
+    text-transform: uppercase;
+}
+
+.reveal .slides section .fragment.highlight-current-blue.current-fragment {
+    color: #105799;
+    font-weight: bold;
+}

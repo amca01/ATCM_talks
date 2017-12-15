@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Lindenmayer Systems</title>
+<meta name="author" content="(Alasdair McAndrew (export-snippet (:back-end html :value <br><br> :begin 18 :end 35 :post-blank 0 :parent #0)) College of Engineering and Science (export-snippet (:back-end html :value <br> :begin 69 :end 82 :post-blank 0 :parent #0)) Victoria University, (export-snippet (:back-end html :value <br> :begin 102 :end 115 :post-blank 0 :parent #0)) Melbourne, Australia)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./css/reveal.css"/>
+
+<link rel="stylesheet" href="./css/theme/melbourne.css" id="theme"/>
+
+<link rel="stylesheet" href="file:///home/amca/Nextcloud/reveal.js/lib/styles/gruvbox-dark.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src=""https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML""></script>
+<meta name="description" content="Org-Reveal Introduction.">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Lindenmayer Systems</h1><h2 class="author">Alasdair McAndrew<br><br>College of Engineering and Science<br>Victoria University,<br>Melbourne, Australia</h2><h2 class="date">December, 2017</h2>
+</section>
+
+<section>
+<section id="slide-org99ae386">
+<h2 id="org99ae386">What is a Lindenmayer system?</h2>
+<ul>
+<li class="fragment highlight-current-blue">Designed to explore organic growth</li>
+<li class="fragment highlight-current-blue">Creates complex shapes from simple rules</li>
+<li class="fragment highlight-current-blue">For example, with the rules:
+\[
+  \Rule{0em}{3ex}{1.3ex}\color{blue}{0\rightarrow 1},\qquad\color{red}{1\rightarrow 01}
+  \]
+we have this string transformation:
+\[
+  \Rule{0em}{2.7ex}{1ex}01101=\color{blue}{0}\;\color{red}{1\;1}\;\color{blue}{0}\;\color{red}{1}
+  \longrightarrow\color{blue}{1}\;\color{red}{01\;01}\;\color{blue}{1}\;\color{red}{01}=10101101
+  \]</li>
+<li class="fragment highlight-current-blue">All operations take place <i>simultaneously</i></li>
+<li class="fragment highlight-current-blue">L-systems are <i>term-rewriting systems</i></li>
+
+</ul>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org3f945a3">
+<h2 id="org3f945a3">Fractals: real&#x2026;</h2>
+
+<div class="figure">
+<p><img src="./trees2.jpg" alt="trees2.jpg" width="1200" />
+</p>
+</div>
+
+<p>
+All these lovely fractal trees in the city of Melbourne, Australia, in the winter.
+</p>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd4598c6">
+<h2 id="orgd4598c6">Fractals are everywhere</h2>
+<p>
+Once you start looking, you can't stop seeing them
+</p>
+
+
+<div class="figure">
+<p><img src="./out1.jpg" alt="out1.jpg" />
+</p>
+</div>
+</section>
+<section >
+
+<div class="figure">
+<p><img src="./out2.jpg" alt="out2.jpg" />
+</p>
+</div>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org1a5ffdf">
+<h2 id="org1a5ffdf">Fractals: manufactured&#x2026;</h2>
+
+<div class="figure">
+<p><img src="./agop.jpg" alt="agop.jpg" width="1200" />
+</p>
+</div>
+
+<p>
+These are all examples from <i>The Algorithmic Beauty of Plants</i> by 
+Aristid Lindenmayer and Przemysław Prusinkiewicz, available at 
+<a href="http://algorithmicbotany.org/papers/abop/abop.pdf">http://algorithmicbotany.org/papers/abop/abop.pdf</a>
+</p>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org31e629f">
+<h2 id="org31e629f">Turning strings of symbols into pictures</h2>
+<ul>
+<li>Sets of rules describe how one string of symbols will be expanded to a new string</li>
+<li>Each symbol corresponds to a <i>turtle graphics</i> instruction:
+
+<ul>
+<li><code>F</code>: Move forward</li>
+<li><code>-</code>: Turn left</li>
+<li><code>+</code>: Turn right</li>
+<li><code>[</code>: Memorize current position and heading</li>
+<li><code>]</code>: Move to most recently memorized position and heading</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org37ee5db">
+<h2 id="org37ee5db">An example</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+For example, this sequence of symbols:
+<br><br>
+</p>
+
+<p>
+<code>F[+F]F[-F]F</code> 
+</p>
+
+<p>
+<br>
+has this output: 
+<br><br>
+</p>
+
+<p>
+We can clearly alter the output by changing the angle of the turns, 
+and the length of the move forward.
+</p>
+
+<p>
+In this example, the angle is 26&deg;
+</p>
+</div>
+<div class="column" style="float:right; width:50%">
+
+<div class="figure">
+<p><img src="./l_tree1.jpg" alt="l_tree1.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd3b36a8">
+<h2 id="orgd3b36a8">How turtle graphics works</h2>
+<p>
+This shows how the turtle draws a path with branches:
+</p>
+
+
+<div class="figure">
+<p><img src="./growth.jpg" alt="growth.jpg" width="1000px" />
+</p>
+</div>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org40168e9">
+<h2 id="org40168e9">More on turtle graphics</h2>
+<p>
+It's all done from the point of view of the turtle.  A side of <i>Koch's
+snowflake</i> can be computed by the rules:
+</p>
+
+<ul>
+<li>Start: <code>F</code></li>
+<li>Modify: <code>F</code> &rarr; <code>F+F--F+F</code> (with turns of 60&deg;)</li>
+<li>At every further step, each <code>F</code> is replaced by the string <code>F+F--F+F</code></li>
+<li><p>
+The second iteration produces
+</p>
+
+<p>
+<code>F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F</code>
+</p></li>
+<li><p>
+The third iteration produces:
+</p>
+
+<p>
+<code>F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F+F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F+F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F</code>
+</p></li>
+<li>and so on&#x2026;</li>
+
+</ul>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org1752828">
+<h2 id="org1752828">Turtle graphics <i>with pictures!</i></h2>
+<div class="column" style="float:left; text-align:right; width:50%">
+<p>
+<br><br>
+First iteration:&nbsp;
+<br><br><br>
+Second iteration:&nbsp;
+<br><br><br>
+Third iteration:&nbsp;
+<br><br><br>
+Fourth iteration:&nbsp;
+</p>
+</div>
+<div class="column" style="float:right; width:50%">
+
+<div class="figure">
+<p><img src="./koch_snowflake.jpg" alt="koch_snowflake.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org9d8895b">
+<h2 id="org9d8895b">Some mathematics</h2>
+<p>
+Remember the <code>F</code> \(\rightarrow\) <code>F+F--F+F</code> iteration?  How many symbols 
+are in the \(n\)<sup>th</sup> string?
+</p>
+
+<p>
+Let \(f_n\) be the number of <code>F</code>'s, and \(k_n\) be the number of other
+symbols in the \(n\)<sup>th</sup> string. We have:
+</p>
+
+<div>
+\begin{eqnarray*}
+f_{n+1}&=&4f_n,\quad f_1=4\\
+k_{n+1}&=&4f_n+k_{n-1},\quad k_1=4
+\end{eqnarray*}
+
+</div>
+
+<p>
+It follows immediately that
+\[
+f_n=4^n\mbox{ and }k_n=4+4^2+4^3+\cdots+4^n=\frac{4}{3}(4^n-1).
+\]
+The total length is thus
+\[
+f_n+k_n=4^n+\frac{4}{3}(4^n-1)=\frac{1}{3}(7(4^n)-4).
+\]
+</p>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgf5ece6f">
+<h2 id="orgf5ece6f">The fractal plant in modern languages: Racket</h2>
+<p>
+Racket is a modern lisp; descended from Scheme.
+</p>
+<div class="org-src-container">
+
+<pre><code class="Scheme" >;;   F -&gt; F[+F]F[-F]F
+
+(require furtle) ;; furtle is a simple but fast turtle graphics library
+(: ltree_b (-&gt; Real Real Real TurtleF))  ;; typed Racket so must declare types
+(define (ltree level size angle)
+  (if (= level 0)
+      (turtles (forward size))
+      (turtles (ltree (- level 1) (/ size 3) angle)               ; F
+	       (save)                                             ; [
+	       (left angle) (ltree (- level 1) (/ size 3) angle)  ; +F
+	       (restore)                                          ; ]
+	       (ltree (- level 1) (/ size 3) angle)               ; F 
+	       (save)                                             ; [
+	       (right angle) (ltree (- level 1) (/ size 3) angle) ; -F
+	       (restore)                                          ; ]
+	       (ltree (- level 1) (/ size 3) angle))))            ; F
+</code></pre>
+</div>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org2ffe290">
+<h2 id="org2ffe290">The fractal plant in modern languages: Python</h2>
+<div class="org-src-container">
+
+<pre><code class="Python" >import turtle as t  # "turtle" is a turtle graphics module
+
+# Lindenmayer system (a) from ABOP figure 1.24(a), p 25
+def edgetree(level, size, angle):
+    if (level==0):
+	t.fd(size)
+    else:
+	edgetree(level-1, size/3, angle)
+	t.lt(angle)
+	edgetree(level-1, size/3, angle)
+	t.bk(size/3)
+	t.rt(angle)
+	edgetree(level-1, size/3, angle)
+	t.rt(angle)
+	edgetree(level-1, size/3, angle)
+	t.bk(size/3)
+	t.lt(angle)
+	edgetree(level-1, size/3, angle)
+</code></pre>
+</div>
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgad33854">
+<h2 id="orgad33854">Some more mathematics</h2>
+<p>
+<i>Fractal dimension</i> can be defined by the "box-counting measure":
+</p>
+
+<p>
+Suppose our picture is subdivided into boxes of size \(b\), and \(N(b)\) boxes 
+are needed to cover the shape.  Its dimension can be defined as
+\[
+\lim_{b\to 0}\frac{\log(N(b))}{\log(1/b)}.
+\]
+For example, take a curve of length \(k\). As \(b\to 0\), we would find that
+\[
+N(b)\to \frac{k}{b}.
+\]
+Thus
+\[
+\lim_{b\to 0}\frac{\log(N(b))}{\log(1/b)}=\lim_{b\to 0}\frac{\log(k/b)}{\log(1/b)}
+=\lim_{b\to 0}1-\frac{\log(k)}{\log(b)}=1.
+\]
+In general a fractal will have a non-integer dimension between 1 and 2.
+</p>
+
+
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org8e1c13f">
+<h2 id="org8e1c13f">Some concluding remarks</h2>
+<ul>
+<li>Lindenmayer systems provide a neat, elegant and simple way to explore 
+fractal geometry&hellip;</li>
+<li>&hellip; and to explore natural shapes such as plants</li>
+<li>Fractals are <i>everywhere</i> in the world</li>
+<li>Their mathematics is subtle, interesting, and beautiful</li>
+<li>A wonderful mixture of mathematics, computing, algebra, and graphics</li>
+
+<li>Thank you all!</li>
+
+</ul>
+<div class="slide-footer">Lindenmayer Systems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+</div>
+</div>
+<p> Created by Alasdair </p>
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+minScale: 0.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'None', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+]
+});
+</script>
+</body>
+</html>

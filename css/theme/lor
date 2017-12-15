@@ -1,0 +1,220 @@
+serif.css:47:  margin: 0 0 20px 0;
+serif.css:76:  margin: 20px 0;
+serif.css:98:  margin: 0 0 0 1em; }
+serif.css:117:  margin-left: 40px; }
+serif.css:123:  margin-left: 40px; }
+serif.css:129:  margin: 20px auto;
+serif.css:146:  margin: 20px auto;
+serif.css:166:  margin: auto;
+serif.css:229:  margin: 15px 0px;
+template/theme.scss:47:	margin: $headingMargin;
+template/theme.scss:76:	margin: $blockMargin 0;
+template/theme.scss:102:	margin: 0 0 0 1em;
+template/theme.scss:126:	margin-left: 40px;
+template/theme.scss:134:	margin-left: 40px;
+template/theme.scss:141:	margin: $blockMargin auto;
+template/theme.scss:161:	margin: $blockMargin auto;
+template/theme.scss:187:	margin: auto;
+template/theme.scss:267:	margin: 15px 0px;
+solita.css:38:  margin: 0 0 20px 0;
+solita.css:74:  margin: 15px 0px;
+solita.css:166:  margin-left: 90px;
+solita.css:167:  margin-right: 90px; }
+neoskop-light.css:43:  margin: 0 0 20px 0;
+neoskop-light.css:79:  margin: 15px 0px;
+night.css:45:  margin: 0 0 20px 0;
+night.css:74:  margin: 20px 0;
+night.css:96:  margin: 0 0 0 1em; }
+night.css:115:  margin-left: 40px; }
+night.css:121:  margin-left: 40px; }
+night.css:127:  margin: 20px auto;
+night.css:144:  margin: 20px auto;
+night.css:164:  margin: auto;
+night.css:227:  margin: 15px 0px;
+moon.css:51:  margin: 0 0 20px 0;
+moon.css:80:  margin: 20px 0;
+moon.css:102:  margin: 0 0 0 1em; }
+moon.css:121:  margin-left: 40px; }
+moon.css:127:  margin-left: 40px; }
+moon.css:133:  margin: 20px auto;
+moon.css:150:  margin: 20px auto;
+moon.css:170:  margin: auto;
+moon.css:233:  margin: 15px 0px;
+robreact.css:94:  margin: 0 0 20px 0;
+robreact.css:139:  margin: 15px 0px;  -webkit-transition: all .2s linear;
+simple.css:50:  margin: 0 0 20px 0;
+simple.css:79:  margin: 20px 0;
+simple.css:101:  margin: 0 0 0 1em; }
+simple.css:120:  margin-left: 40px; }
+simple.css:126:  margin-left: 40px; }
+simple.css:132:  margin: 20px auto;
+simple.css:149:  margin: 20px auto;
+simple.css:169:  margin: auto;
+simple.css:232:  margin: 15px 0px;
+black.css:47:  margin: 0 0 20px 0;
+black.css:76:  margin: 20px 0;
+black.css:98:  margin: 0 0 0 1em; }
+black.css:117:  margin-left: 40px; }
+black.css:123:  margin-left: 40px; }
+black.css:129:  margin: 20px auto;
+black.css:146:  margin: 20px auto;
+black.css:166:  margin: auto;
+black.css:229:  margin: 15px 0px;
+white.css:47:  margin: 0 0 20px 0;
+white.css:76:  margin: 20px 0;
+white.css:98:  margin: 0 0 0 1em; }
+white.css:117:  margin-left: 40px; }
+white.css:123:  margin-left: 40px; }
+white.css:129:  margin: 20px auto;
+white.css:146:  margin: 20px auto;
+white.css:166:  margin: auto;
+white.css:229:  margin: 15px 0px;
+sky.css:54:  margin: 0 0 20px 0;
+sky.css:83:  margin: 20px 0;
+sky.css:105:  margin: 0 0 0 1em; }
+sky.css:124:  margin-left: 40px; }
+sky.css:130:  margin-left: 40px; }
+sky.css:136:  margin: 20px auto;
+sky.css:153:  margin: 20px auto;
+sky.css:173:  margin: auto;
+sky.css:236:  margin: 15px 0px;
+source/myplanet.scss:243:	margin-bottom: 2.5vmin;
+source/myplanet.scss:261:	margin: 0;
+source/myplanet.scss:264:@mixin section ($margin: 0) {
+source/myplanet.scss:265:	@if ($margin == 0) {
+source/myplanet.scss:267:		margin: 0;
+source/myplanet.scss:271:		height: calc(100vh - #{2 * $margin});
+source/myplanet.scss:272:		margin: $margin;
+source/myplanet.scss:273:		width: calc(100vw - #{2* $margin});
+source/myplanet.scss:312:		margin-right: $headerLogoHeight;
+source/myplanet.scss:354:		margin: auto;
+source/myplanet.scss:365:	margin-left: 22vw;
+source/myplanet.scss:410:			margin: 0 0 .8em 0;
+source/myplanet.scss:447:			margin-top: 0.5em;
+source/myplanet.scss:462:		margin: 0;
+source/myplanet.scss:496:		margin: 0;
+source/myplanet.scss:504:		margin: .8em 0;
+source/myplanet.scss:548:		margin-bottom: 0.5em;
+source/myplanet.scss:551:		margin-top: 0;
+source/myplanet.scss:554:		margin-bottom: 0;
+source/myplanet.scss:561:		margin-right: $slidePadding/2;
+source/myplanet.scss:565:		margin: 0.6em 0;
+source/myplanet.scss:571:		margin: 0.6em 0;
+source/myplanet.scss:638:			margin-right: $slidePadding/2;
+source/myplanet.scss:664:			margin-right: $slidePadding/2;
+source/myplanet.scss:685:		margin: auto;
+source/myplanet.scss:712:	margin: 0;
+source/solita.scss:89:        margin-left: 90px;
+source/solita.scss:90:        margin-right: 90px;
+csyntax-theme.css:22:  margin: 0 0 20px 0;
+csyntax-theme.css:45:  margin: 20px 0;
+csyntax-theme.css:66:  margin: 0 0 0 1em;
+csyntax-theme.css:85:  margin-left: 40px;
+csyntax-theme.css:91:  margin-left: 40px;
+csyntax-theme.css:101:  margin: 20px auto;
+csyntax-theme.css:118:  margin: 20px auto;
+csyntax-theme.css:151:  margin: auto;
+csyntax-theme.css:191:  margin: 15px 0px;
+csyntax-theme.css:322:  margin-left: 15%;
+csyntax-theme.css:328:  margin-bottom: 5px;
+csyntax-theme.css:333:  margin-top: 10px;
+csyntax-theme.css:345:  margin: 0 auto;
+csyntax-theme.css:366:  margin-top: 100px;
+csyntax-theme.css:367:  margin-left: 0;
+csyntax-theme.css:371:  margin-top: 25px;
+csyntax-theme.css:372:  margin-left: 20px;
+csyntax-theme.css:383:  margin-left: 0;
+csyntax-theme.css:386:  margin-top: 20%;
+csyntax-theme.css:390:  margin-top: 25px;
+csyntax-theme.css:410:  margin-bottom: 0;
+league.css:53:  margin: 0 0 20px 0;
+league.css:82:  margin: 20px 0;
+league.css:104:  margin: 0 0 0 1em; }
+league.css:123:  margin-left: 40px; }
+league.css:129:  margin-left: 40px; }
+league.css:135:  margin: 20px auto;
+league.css:152:  margin: 20px auto;
+league.css:172:  margin: auto;
+league.css:235:  margin: 15px 0px;
+solarized.css:51:  margin: 0 0 20px 0;
+solarized.css:80:  margin: 20px 0;
+solarized.css:102:  margin: 0 0 0 1em; }
+solarized.css:121:  margin-left: 40px; }
+solarized.css:127:  margin-left: 40px; }
+solarized.css:133:  margin: 20px auto;
+solarized.css:150:  margin: 20px auto;
+solarized.css:170:  margin: auto;
+solarized.css:233:  margin: 15px 0px;
+blood.css:50:  margin: 0 0 20px 0;
+blood.css:79:  margin: 20px 0;
+blood.css:101:  margin: 0 0 0 1em; }
+blood.css:120:  margin-left: 40px; }
+blood.css:126:  margin-left: 40px; }
+blood.css:132:  margin: 20px auto;
+blood.css:149:  margin: 20px auto;
+blood.css:169:  margin: auto;
+blood.css:232:  margin: 15px 0px;
+myplanet.css:46:  margin: 0 0 20px 0;
+myplanet.css:75:  margin: 20px 0;
+myplanet.css:97:  margin: 0 0 0 1em; }
+myplanet.css:116:  margin-left: 40px; }
+myplanet.css:122:  margin-left: 40px; }
+myplanet.css:132:  margin: 20px auto;
+myplanet.css:149:  margin: 20px auto;
+myplanet.css:168:  margin: auto;
+myplanet.css:231:  margin: 15px 0px;
+myplanet.css:546:  margin-bottom: 2.5vmin;
+myplanet.css:561:  margin: 0; }
+myplanet.css:565:  margin: 0;
+myplanet.css:591:    margin-right: 4.5vmin;
+myplanet.css:608:  margin: 4vmin;
+myplanet.css:613:      margin: 2vmin;
+myplanet.css:622:    margin: auto;
+myplanet.css:629:  margin: 4vmin;
+myplanet.css:632:  margin-left: 22vw;
+myplanet.css:637:      margin: 2vmin;
+myplanet.css:663:      margin: 0 0 .8em 0;
+myplanet.css:686:      margin-top: 0.5em; } }
+myplanet.css:695:  margin: 0; }
+myplanet.css:716:  margin: 0;
+myplanet.css:724:  margin: .8em 0;
+myplanet.css:757:  margin-bottom: 0.5em; }
+myplanet.css:760:  margin-top: 0; }
+myplanet.css:763:  margin-bottom: 0; }
+myplanet.css:769:  margin-right: 5vmin;
+myplanet.css:773:  margin: 0.6em 0; }
+myplanet.css:778:  margin: 0.6em 0; }
+myplanet.css:825:    margin-right: 5vmin;
+myplanet.css:844:    margin-right: 5vmin;
+myplanet.css:851:  margin: 0;
+myplanet.css:861:    margin: auto;
+myplanet.css:881:  margin: 0;
+metropolis.css:66:    margin: 0 0 20px 0;
+metropolis.css:114:    margin-left:25px;
+metropolis.css:115:    margin-right:25px;
+metropolis.css:125:    margin: 20px 0;
+metropolis.css:147:    margin: 0 0 0 1em; }
+metropolis.css:166:    margin-left: 40px; }
+metropolis.css:172:    margin-left: 40px; }
+metropolis.css:182:    margin: 20px auto;
+metropolis.css:199:    margin: 20px auto;
+metropolis.css:218:    margin: auto;
+metropolis.css:280:    margin: 15px 0px;
+ember.css:36:  margin: 0 0 20px 0;
+ember.css:76:  margin: 15px 0px;
+reveal.css:12:  margin: 0;
+reveal.css:174:  margin-top: 1px; }
+reveal.css:269:  margin: auto;
+reveal.css:672:  margin: 0;
+reveal.css:686:  margin: 70px 0;
+reveal.css:957:  margin: -16px 0 0 -16px;
+reveal.css:1033:  margin: 0 auto;
+beige.css:51:  margin: 0 0 20px 0;
+beige.css:80:  margin: 20px 0;
+beige.css:102:  margin: 0 0 0 1em; }
+beige.css:121:  margin-left: 40px; }
+beige.css:127:  margin-left: 40px; }
+beige.css:133:  margin: 20px auto;
+beige.css:150:  margin: 20px auto;
+beige.css:170:  margin: auto;
+beige.css:233:  margin: 15px 0px;

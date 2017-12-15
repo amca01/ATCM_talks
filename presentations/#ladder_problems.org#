@@ -1,0 +1,601 @@
+#+OPTIONS: num:nil toc:nil timestamp:nil
+#+REVEAL_TRANS: None
+#+REVEAL_THEME: melbourne
+# #+REVEAL_THEME: robreact
+# #+OPTIONS: reveal_center:t 
+#+OPTIONS: reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_slide_number:h/v
+# #+OPTIONS: reveal_width:1200
+# #+OPTIONS: reveal_single_file:t
+# #+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+# #+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_HLEVEL: 2
+#+REVEAL_HEAD_PREAMBLE: <meta name="description" content="Org-Reveal Introduction.">
+#+REVEAL_POSTAMBLE: <p> Created by Alasdair </p>
+#+REVEAL_PLUGINS: (highlight markdown notes menu)
+#+REVEAL_HIGHLIGHT_CSS: file:///home/amca/Nextcloud/reveal.js/lib/styles/gruvbox-dark.css
+# #+REVEAL_EXTRA_CSS: bootstrap.css
+# #+REVEAL_EXTRA_CSS: ./local.css
+# #+REVEAL_MATHJAX_URL: "file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+HTML_MATHJAX: file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+#+REVEAL_SLIDE_FOOTER: Ladder problems: Alasdair McAndrew, ATCM2017
+#+Title: A litany of ladders: easy problems with hard solutions
+#+AUTHOR: Alasdair McAndrew@@html:<br><br>@@College of Engineering and Science@@html:<br>@@Victoria University,@@html:<br>@@Melbourne, Australia
+#+Email: Alasdair.McAndrew@vu.edu.au
+#+DATE: December, 2017
+
+* Introduction
+#+ATTR_REVEAL: :frag (roll-in)
+- Carl Gustav Jacobi: "Man muss immer generalisieren": /one must always generalize/
+- But generalizing is /hard/
+- (if you're not a genius)
+- However, a CAS can help
+- *This* talk consists of two case studies in the use of CAS to generalize two standard problems
+- And as we shall see, even a CAS can take us only so far\dots
+
+* Problem 1: crossed ladders
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+Two ladders of given lengths $a$ and $b$ are shown in an alley; the height of
+their crossing above the ground $h$ is also given.
+
+How wide is the alley?
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :height 500px
+[[file:./crossed_ladders1.jpg]]
+
+#+REVEAL_HTML: </div>
+
+* Solving the crossed ladders
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+Introduce some variables, then by similar triangles we find that
+\[
+\frac{1}{h}=\frac{1}{A}+\frac{1}{B}
+\]
+(this is the /crossed ladders theorem/), so that
+\[
+\frac{1}{h}=\frac{1}{\sqrt{a^2-x^2}}+\frac{1}{\sqrt{b^2-x^2}}
+\]
+All we have to do now is to turn this into a polynomial equation in $x$.
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :height 500px
+[[file:./crossed_ladders2.jpg]]
+
+#+REVEAL_HTML: </div>
+
+* Crossed ladders with a CAS:
+
+ #+BEGIN_SRC Python
+sage: R.<a,b,h,x,A,B,y,z> = PolynomialRing(QQ)
+sage: Id = R.ideal([A^2+x^2-a^2, B^2+x^2-b^2, y+z-x, y*B-x*h, z*A-x*h])
+sage: E = Id.elimination_ideal([A,B,y,z])
+sage: p = E.gen(0)
+sage: px = list(p.factor())[1][0].polynomial(x)
+ #+END_SRC
+which leads to:
+
+\begin{array}{l}
+    x^8+\left(-2 a^2-2 b^2+4 h^2\right) x^6+\left(a^4+4 a^2 b^2
+       +b^4-6 a^2 h^2-6 b^2 h^2\right) x^4\\
+    \qquad + \left(-2 a^4 b^2-2 a^2 b^4+2 a^4 h^2+8 a^2 b^2 h^2+2 b^4 h^2\right) x^2\\
+    \qquad +a^4 b^4-2 a^4 b^2 h^2-2 a^2 b^4 h^2+a^4 h^4-2 a^2 b^2 h^4
+       +b^4 h^4
+\end{array} 
+
+which is a quartic in $x^2$.  
+
+* Exploring: what values of $a$, $b$ and $h$ lead to nice solutions?
+
+We can try  a brute force program to look for values which lead to a polynomial 
+which can be factorized:
+
+#+BEGIN_SRC Python
+sage: var('w')    
+sage: for i in range(1,100):
+....:     for j in range(i+1,100):
+....:         for k in range(1,min(i,j)):
+....:             pp=px.subs(a=i,b=j,h=k,x=w)
+....:             pl = pp.factor_list()
+....:             if len(pl)>2:
+....:                 print i,j,k,pp.factor()
+#+END_SRC
+
+which leads to the possible values (without necessary scaling):
+
+\begin{align*}
+    a,b,h,x&=37,91,14,35\\
+    &=51,75,40,45\\
+    &=52,60,45,48\\
+    &=75,78,70,72
+\end{align*}
+
+#+REVEAL: split
+
+Factoring into two quadratics; if $a,b,h=20,28,15$ then we have
+
+\[
+(x^4 + 16x^2 - 108800)(x^4 - 1484x^2 + 563200)
+\]
+for which the only positive real solution is
+\[
+x = 2\sqrt{18\sqrt{2}-2}\approx 17.9428.
+\]
+
+Even easier: write $u=A+B$, and solve for $u$:
+\[
+u^4-4hu^3-(a^2-b^2)^2.
+\]
+We can obtain $x$ from $u$.
+
+* Generalizing the crossed ladders problem
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+Here is where it starts to get messy.  One simple(?) generalization:
+give the ladders a non-zero width
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :height 500px
+[[file:./crossed_ladders3.jpg]]
+
+#+REVEAL_HTML: </div>
+
+* Starting the solution
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+As before, introduce some new variables which can be related by
+similar triangles and Pythagoras' theorem:
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :height 500px
+[[file:./crossed_ladders4.jpg]]
+
+#+REVEAL_HTML: </div>
+
+* Obtaining the polynomial
+
+ #+BEGIN_SRC Python
+sage: R.<a,b,w,h,x,p,q,r,s,y,z> = PolynomialRing(QQ)
+sage: Id = R.ideal([p^2+q^2-w^2,r^2+s^2-w^2,q*b-w*(y+z+r),s*a-w*(y+z+p),\
+....: y*p-h*q,z*r-h*s,x-p-r-y-z])
+sage: E = Id.elimination_ideal([p,q,r,s,y,z])   
+sage: px = E.gen(0).polynomial(x)
+
+ #+END_SRC
+
+* This is the polynomial:
+
+\begin{array}[l]
+(a^4 b^4 w^2 - 2 a^2 b^2 w^6 + w^{10}) x^{12}\\
+ + (-4 a^4 b^3 w^3 h -
+4 a^3 b^4 w^3 h + 4 a^3 b^2 w^5 h + 4 a^2 b^3 w^5 h + 4 a^2 b w^7 h\\
+ + 4 a b^2 w^7 h - 4 a w^9 h - 4 b w^9 h) x^{11} + (-2 a^6 b^4 w^2 - 2 a^4 b^6 w^2
+- 4 a^4 b^4 w^4\\
+ + 6 a^4 b^2 w^6 + 6 a^2 b^4 w^6 + 4 a^2 b^2 w^8 - 4 a^2 w^{10}
+- 4 b^2 w^{10} + 4 a^4 b^4 w^2 h^2\\
+ + 4 a^4 b^2 w^4 h^2 - 8 a^3 b^3 w^4 h^2 +
+4 a^2 b^4 w^4 h^2 - 8 a^3 b w^6 h^2 + 8 a^2 b^2 w^6 h^2 - 8 a b^3 w^6 h^2\\
+ +4 a^2 w^8 h^2 - 8 a b w^8 h^2 + 4 b^2 w^8 h^2 + 4 w^{10} h^2) x^{10} +
+(8 a^6 b^3 w^3 h + 4 a^5 b^4 w^3 h\\
+ + 4 a^4 b^5 w^3 h + 8 a^3 b^6 w^3 h -
+8 a^5 b^2 w^5 h - 4 a^4 b^3 w^5 h - 4 a^3 b^4 w^5 h - 8 a^2 b^5 w^5 h\\
+ - 12 a^4 b w^7 h - 8 a^3 b^2 w^7 h - 8 a^2 b^3 w^7 h - 12 a b^4 w^7 h +
+12 a^3 w^9 h + 12 b^3 w^9 h\\
+ + 8 a w^{11} h + 8 b w^{11} h) x^9 + (a^8 b^4 w^2 +
+4 a^6 b^6 w^2 + a^4 b^8 w^2 + 8 a^6 b^4 w^4 + 8 a^4 b^6 w^4
+\end{array}
+
+#+REVEAL: split
+\begin{array}[l]
+{} - 6 a^6 b^2 w^6 -
+16 a^4 b^4 w^6 - 6 a^2 b^6 w^6 - 8 a^4 b^2 w^8 - 8 a^2 b^4 w^8 + 6 a^4 w^{10}\\
++ 10 a^2 b^2 w^{10} + 6 b^4 w^{10} - 6 a^6 b^4 w^2 h^2 - 6 a^4 b^6 w^2 h^2 -
+10 a^6 b^2 w^4 h^2 + 24 a^5 b^3 w^4 h^2\\ + 24 a^3 b^5 w^4 h^2 -
+10 a^2 b^6 w^4 h^2 + 16 a^5 b w^6 h^2 - 20 a^4 b^2 w^6 h^2 +
+64 a^3 b^3 w^6 h^2 - 20 a^2 b^4 w^6 h^2\\ + 16 a b^5 w^6 h^2 - 6 a^4 w^8 h^2 +
+24 a^3 b w^8 h^2 - 60 a^2 b^2 w^8 h^2 + 24 a b^3 w^8 h^2 - 6 b^4 w^8 h^2\\ -
+22 a^2 w^{10} h^2 - 22 b^2 w^{10} h^2 - 4 w^{12} h^2) x^8
++ (-4 a^8 b^3 w^3 h
+- 8 a^6 b^5 w^3 h - 8 a^5 b^6 w^3 h\\ - 4 a^3 b^8 w^3 h + 4 a^7 b^2 w^5 h -
+4 a^6 b^3 w^5 h + 20 a^5 b^4 w^5 h + 20 a^4 b^5 w^5 h - 4 a^3 b^6 w^5 h\\ +
+4 a^2 b^7 w^5 h + 12 a^6 b w^7 h + 4 a^5 b^2 w^7 h + 28 a^4 b^3 w^7 h +
+28 a^3 b^4 w^7 h + 4 a^2 b^5 w^7 h\\ + 12 a b^6 w^7 h - 12 a^5 w^9 h +
+16 a^4 b w^9 h - 24 a^3 b^2 w^9 h - 24 a^2 b^3 w^9 h + 16 a b^4 w^9 h\\ -
+12 b^5 w^9 h - 16 a^3 w^{11} h - 16 a^2 b w^{11} h - 16 a b^2 w^{11} h -
+16 b^3 w^{11} h + 4 a^6 b^3 w^3 h^3\\ - 12 a^5 b^4 w^3 h^3 - 12 a^4 b^5 w^3 h^3 +
+4 a^3 b^6 w^3 h^3 + 4 a^6 b w^5 h^3 - 16 a^5 b^2 w^5 h^3 - 4 a^4 b^3 w^5 h^3\\ -
+4 a^3 b^4 w^5 h^3 - 16 a^2 b^5 w^5 h^3 + 4 a b^6 w^5 h^3 - 4 a^5 w^7 h^3 +
+8 a^4 b w^7 h^3 - 4 a^3 b^2 w^7 h^3\\ - 4 a^2 b^3 w^7 h^3 + 8 a b^4 w^7 h^3
+\end{array}
+
+#+REVEAL: split
+\begin{array}[l]
+{}- 4 b^5 w^7 h^3 + 4 a^3 w^9 h^3 + 12 a^2 b w^9 h^3 + 12 a b^2 w^9 h^3 +
+4 b^3 w^9 h^3 + 8 a w^{11} h^3\\ + 8 b w^{11} h^3) x^7
++ (-2 a^8 b^6 w^2 -
+2 a^6 b^8 w^2 - 4 a^8 b^4 w^4 - 16 a^6 b^6 w^4 - 4 a^4 b^8 w^4\\ + 2 a^8 b^2 w^6
++ 14 a^6 b^4 w^6 + 14 a^4 b^6 w^6 + 2 a^2 b^8 w^6 + 4 a^6 b^2 w^8 +
+16 a^4 b^4 w^8\\ + 4 a^2 b^6 w^8 - 4 a^6 w^{10} - 10 a^4 b^2 w^{10} -
+10 a^2 b^4 w^{10} - 4 b^6 w^{10} + 2 a^8 b^4 w^2 h^2\\ + 8 a^6 b^6 w^2 h^2 +
+2 a^4 b^8 w^2 h^2 + 6 a^8 b^2 w^4 h^2 - 16 a^7 b^3 w^4 h^2 + 4 a^6 b^4 w^4 h^2
+- 52 a^5 b^5 w^4 h^2\\ + 4 a^4 b^6 w^4 h^2 - 16 a^3 b^7 w^4 h^2 +
+6 a^2 b^8 w^4 h^2 - 8 a^7 b w^6 h^2 + 24 a^6 b^2 w^6 h^2 - 92 a^5 b^3 w^6 h^2\\
++ 16 a^4 b^4 w^6 h^2 - 92 a^3 b^5 w^6 h^2 + 24 a^2 b^6 w^6 h^2 -
+8 a b^7 w^6 h^2 - 24 a^5 b w^8 h^2\\ + 80 a^4 b^2 w^8 h^2 - 80 a^3 b^3 w^8 h^2 +
+80 a^2 b^4 w^8 h^2 - 24 a b^5 w^8 h^2 + 14 a^4 w^{10} h^2 + 4 a^3 b w^{10} h^2\\
++ 120 a^2 b^2 w^{10} h^2 + 4 a b^3 w^{10} h^2 + 14 b^4 w^{10} h^2 +
+22 a^2 w^{12} h^2 + 20 a b w^{12} h^2\\ + 22 b^2 w^{12} h^2) x^6 +
+(4 a^8 b^5 w^3 h + 4 a^5 b^8 w^3 h + 4 a^8 b^3 w^5 h - 16 a^7 b^4 w^5 h\\ -
+16 a^6 b^5 w^5 h - 16 a^5 b^6 w^5 h - 16 a^4 b^7 w^5 h + 4 a^3 b^8 w^5 h -
+4 a^8 b w^7 h - 32 a^6 b^3 w^7 h
+\end{array}
+
+#+REVEAL: split
+\begin{array}[l]
+{} - 16 a^5 b^4 w^7 h - 16 a^4 b^5 w^7 h -
+32 a^3 b^6 w^7 h - 4 a b^8 w^7 h + 4 a^7 w^9 h - 16 a^6 b w^9 h\\ +
+32 a^5 b^2 w^9 h + 8 a^4 b^3 w^9 h + 8 a^3 b^4 w^9 h + 32 a^2 b^5 w^9 h -
+16 a b^6 w^9 h + 4 b^7 w^9 h\\ + 8 a^5 w^{11} h + 8 a^4 b w^{11} h +
+32 a^3 b^2 w^{11} h + 32 a^2 b^3 w^{11} h + 8 a b^4 w^{11} h + 8 b^5 w^{11} h\\ -
+4 a^8 b^3 w^3 h^3 + 8 a^7 b^4 w^3 h^3 + 12 a^6 b^5 w^3 h^3 +
+12 a^5 b^6 w^3 h^3 + 8 a^4 b^7 w^3 h^3 - 4 a^3 b^8 w^3 h^3\\ - 4 a^8 b w^5 h^3 +
+12 a^7 b^2 w^5 h^3 - 12 a^6 b^3 w^5 h^3 + 28 a^5 b^4 w^5 h^3 +
+28 a^4 b^5 w^5 h^3 - 12 a^3 b^6 w^5 h^3\\ + 12 a^2 b^7 w^5 h^3 - 4 a b^8 w^5 h^3
++ 4 a^7 w^7 h^3 - 24 a^6 b w^7 h^3 + 24 a^5 b^2 w^7 h^3 - 36 a^4 b^3 w^7 h^3\\ -
+36 a^3 b^4 w^7 h^3 + 24 a^2 b^5 w^7 h^3 - 24 a b^6 w^7 h^3 + 4 b^7 w^7 h^3 +
+8 a^5 w^9 h^3 - 56 a^4 b w^9 h^3\\ - 32 a^3 b^2 w^9 h^3 - 32 a^2 b^3 w^9 h^3 -
+56 a b^4 w^9 h^3 + 8 b^5 w^9 h^3 - 4 a^3 w^{11} h^3\\ - 44 a^2 b w^{11} h^3 -
+44 a b^2 w^{11} h^3 - 4 b^3 w^{11} h^3 - 8 a w^{13} h^3 - 8 b w^{13} h^3) x^5
++(a^8 b^8 w^2\\ + 8 a^8 b^6 w^4 + 8 a^6 b^8 w^4 - 4 a^8 b^4 w^6 - 10 a^6 b^6 w^6
+- 4 a^4 b^8 w^6 - 8 a^6 b^4 w^8\\ - 8 a^4 b^6 w^8 + a^8 w^{10} +
+6 a^6 b^2 w^{10} + 3 a^4 b^4 w^{10} + 6 a^2 b^6 w^{10} + b^8 w^{10}\\ -
+2 a^8 b^6 w^2 h^2 - 2 a^6 b^8 w^2 h^2 - 4 a^8 b^4 w^4 h^2 + 28 a^7 b^5 w^4 h^2
+- 4 a^6 b^6 w^4 h^2 + 28 a^5 b^7 w^4 h^2\\ - 4 a^4 b^8 w^4 h^2 -
+8 a^8 b^2 w^6 h^2 + 36 a^7 b^3 w^6 h^2 - 16 a^6 b^4 w^6 h^2 +
+96 a^5 b^5 w^6 h^2 
+\end{array}
+
+#+REVEAL: split
+\begin{array}[l]
+{}- 16 a^4 b^6 w^6 h^2 + 36 a^3 b^7 w^6 h^2 -
+8 a^2 b^8 w^6 h^2 + 2 a^8 w^8 h^2 + 8 a^7 b w^8 h^2 - 36 a^6 b^2 w^8 h^2\\ +
+52 a^5 b^3 w^8 h^2 - 92 a^4 b^4 w^8 h^2 + 52 a^3 b^5 w^8 h^2 -
+36 a^2 b^6 w^8 h^2 + 8 a b^7 w^8 h^2 + 2 b^8 w^8 h^2\\
+ + 6 a^6 w^{10} h^2 -
+8 a^5 b w^{10} h^2 - 108 a^4 b^2 w^{10} h^2 - 24 a^3 b^3 w^{10} h^2 -
+108 a^2 b^4 w^{10} h^2\\ - 8 a b^5 w^{10} h^2 + 6 b^6 w^{10} h^2 -
+24 a^3 b w^{12} h^2 - 84 a^2 b^2 w^{12} h^2 - 24 a b^3 w^{12} h^2 +
+a^8 b^4 w^2 h^4\\ - 2 a^6 b^6 w^2 h^4 + a^4 b^8 w^2 h^4 + 2 a^8 b^2 w^4 h^4 +
+2 a^6 b^4 w^4 h^4 + 8 a^5 b^5 w^4 h^4\\ + 2 a^4 b^6 w^4 h^4 + 2 a^2 b^8 w^4 h^4
++ a^8 w^6 h^4 + 10 a^6 b^2 w^6 h^4 + 16 a^5 b^3 w^6 h^4 + 10 a^4 b^4 w^6 h^4\\ +
+16 a^3 b^5 w^6 h^4 + 10 a^2 b^6 w^6 h^4 + b^8 w^6 h^4 + 6 a^6 w^8 h^4 +
+8 a^5 b w^8 h^4 + 18 a^4 b^2 w^8 h^4\\ + 32 a^3 b^3 w^8 h^4 + 18 a^2 b^4 w^8 h^4
++ 8 a b^5 w^8 h^4 + 6 b^6 w^8 h^4 + 9 a^4 w^{10} h^4 + 16 a^3 b w^{10} h^4\\ +
+14 a^2 b^2 w^{10} h^4 + 16 a b^3 w^{10} h^4 + 9 b^4 w^{10} h^4 +
+4 a^2 w^{12} h^4 + 8 a b w^{12} h^4 + 4 b^2 w^{12} h^4) x^4
+\end{array}
+#+REVEAL: split
+
+\begin{array}[l]
+{}+ (4 a^8 b^5 w^5 h
++ 20 a^7 b^6 w^5 h + 20 a^6 b^7 w^5 h + 4 a^5 b^8 w^5 h + 12 a^8 b^3 w^7 h +
+20 a^6 b^5 w^7 h\\ + 20 a^5 b^6 w^7 h + 12 a^3 b^8 w^7 h + 4 a^8 b w^9 h -
+8 a^7 b^2 w^9 h + 8 a^6 b^3 w^9 h - 28 a^5 b^4 w^9 h\\ - 28 a^4 b^5 w^9 h +
+8 a^3 b^6 w^9 h - 8 a^2 b^7 w^9 h + 4 a b^8 w^9 h - 16 a^5 b^2 w^{11} h -
+16 a^4 b^3 w^{11} h\\ - 16 a^3 b^4 w^{11} h - 16 a^2 b^5 w^{11} h - 8 a^7 b^6 w^3 h^3
+- 8 a^6 b^7 w^3 h^3 + 8 a^8 b^3 w^5 h^3 - 12 a^7 b^4 w^5 h^3\\ -
+4 a^6 b^5 w^5 h^3 - 4 a^5 b^6 w^5 h^3 - 12 a^4 b^7 w^5 h^3 + 8 a^3 b^8 w^5 h^3
++ 8 a^8 b w^7 h^3 - 8 a^7 b^2 w^7 h^3\\ + 44 a^6 b^3 w^7 h^3 +
+20 a^5 b^4 w^7 h^3 + 20 a^4 b^5 w^7 h^3 + 44 a^3 b^6 w^7 h^3 -
+8 a^2 b^7 w^7 h^3 + 8 a b^8 w^7 h^3\\ - 4 a^7 w^9 h^3 + 40 a^6 b w^9 h^3 +
+20 a^5 b^2 w^9 h^3 + 104 a^4 b^3 w^9 h^3 + 104 a^3 b^4 w^9 h^3\\ +
+20 a^2 b^5 w^9 h^3 + 40 a b^6 w^9 h^3 - 4 b^7 w^9 h^3 - 4 a^5 w^{11} h^3 +
+72 a^4 b w^{11} h^3 + 68 a^3 b^2 w^{11} h^3\\ + 68 a^2 b^3 w^{11} h^3 +
+72 a b^4 w^{11} h^3 - 4 b^5 w^{11} h^3 + 40 a^2 b w^{13} h^3 +
+40 a b^2 w^{13} h^3) x^3
+\end{array}
+#+REVEAL: split
+
+\begin{array}[l]
+{} + (-4 a^8 b^8 w^4 + 2 a^8 b^6 w^6 + 2 a^6 b^8 w^6 +
+4 a^6 b^6 w^8 - 2 a^8 b^2 w^{10} - 2 a^2 b^8 w^{10}\\ + 2 a^8 b^6 w^4 h^2 -
+12 a^7 b^7 w^4 h^2 + 2 a^6 b^8 w^4 h^2 - 20 a^7 b^5 w^6 h^2 +
+24 a^6 b^6 w^6 h^2 - 20 a^5 b^7 w^6 h^2\\ + 4 a^7 b^3 w^8 h^2 +
+44 a^6 b^4 w^8 h^2 - 16 a^5 b^5 w^8 h^2 + 44 a^4 b^6 w^8 h^2 +
+4 a^3 b^7 w^8 h^2 - 2 a^8 w^{10} h^2\\ + 4 a^7 b w^{10} h^2 +
+24 a^6 b^2 w^{10} h^2 + 24 a^5 b^3 w^{10} h^2 + 76 a^4 b^4 w^{10} h^2 +
+24 a^3 b^5 w^{10} h^2 + 24 a^2 b^6 w^{10} h^2\\ + 4 a b^7 w^{10} h^2 -
+2 b^8 w^{10} h^2 - 2 a^6 w^{12} h^2 + 4 a^5 b w^{12} h^2 +
+28 a^4 b^2 w^{12} h^2 + 28 a^3 b^3 w^{12} h^2\\ + 28 a^2 b^4 w^{12} h^2 +
+4 a b^5 w^{12} h^2 - 2 b^6 w^{12} h^2 - 2 a^8 b^4 w^4 h^4 - 4 a^7 b^5 w^4 h^4
+- 4 a^6 b^6 w^4 h^4\\ - 4 a^5 b^7 w^4 h^4 - 2 a^4 b^8 w^4 h^4 -
+4 a^8 b^2 w^6 h^4 - 8 a^7 b^3 w^6 h^4 - 16 a^6 b^4 w^6 h^4 -
+24 a^5 b^5 w^6 h^4\\ - 16 a^4 b^6 w^6 h^4 - 8 a^3 b^7 w^6 h^4 -
+4 a^2 b^8 w^6 h^4 - 2 a^8 w^8 h^4 - 4 a^7 b w^8 h^4 - 20 a^6 b^2 w^8 h^4\\ -
+36 a^5 b^3 w^8 h^4 - 36 a^4 b^4 w^8 h^4 - 36 a^3 b^5 w^8 h^4 -
+20 a^2 b^6 w^8 h^4 - 4 a b^7 w^8 h^4 - 2 b^8 w^8 h^4\\ - 8 a^6 w^{10} h^4 -
+16 a^5 b w^{10} h^4 - 32 a^4 b^2 w^{10} h^4 - 48 a^3 b^3 w^{10} h^4 -
+32 a^2 b^4 w^{10} h^4 - 16 a b^5 w^{10} h^4\\ - 8 b^6 w^{10} h^4 -
+10 a^4 w^{12} h^4 - 20 a^3 b w^{12} h^4 - 20 a^2 b^2 w^{12} h^4 -
+20 a b^3 w^{12} h^4 - 10 b^4 w^{12} h^4\\ - 4 a^2 w^{14} h^4 - 8 a b w^{14} h^4 -
+4 b^2 w^{14} h^4) x^2
+\end{array}
+#+REVEAL: split
+
+\begin{array}[l]
+{}+ (-8 a^8 b^7 w^5 h - 8 a^7 b^8 w^5 h - 8 a^8 b^5 w^7 h -
+8 a^5 b^8 w^7 h - 4 a^8 b^3 w^9 h + 4 a^7 b^4 w^9 h\\ + 8 a^6 b^5 w^9 h +
+8 a^5 b^6 w^9 h + 4 a^4 b^7 w^9 h - 4 a^3 b^8 w^9 h + 8 a^5 b^4 w^{11} h +
+8 a^4 b^5 w^{11} h\\ - 4 a^8 b^3 w^7 h^3 - 12 a^7 b^4 w^7 h^3 - 16 a^6 b^5 w^7 h^3
+- 16 a^5 b^6 w^7 h^3 - 12 a^4 b^7 w^7 h^3 - 4 a^3 b^8 w^7 h^3\\ -
+4 a^8 b w^9 h^3 - 12 a^7 b^2 w^9 h^3 - 28 a^6 b^3 w^9 h^3 - 52 a^5 b^4 w^9 h^3
+- 52 a^4 b^5 w^9 h^3 - 28 a^3 b^6 w^9 h^3\\ - 12 a^2 b^7 w^9 h^3 -
+4 a b^8 w^9 h^3 - 12 a^6 b w^{11} h^3 - 36 a^5 b^2 w^{11} h^3 -
+48 a^4 b^3 w^{11} h^3 - 48 a^3 b^4 w^{11} h^3\\ - 36 a^2 b^5 w^{11} h^3 -
+12 a b^6 w^{11} h^3 - 8 a^4 b w^{13} h^3 - 24 a^3 b^2 w^{13} h^3 -
+24 a^2 b^3 w^{13} h^3 - 8 a b^4 w^{13} h^3) x\\ + a^8 b^4 w^{10} - 2 a^6 b^6 w^{10}
++ a^4 b^8 w^{10} - 4 a^8 b^6 w^6 h^2 - 8 a^7 b^7 w^6 h^2 - 4 a^6 b^8 w^6 h^2\\ -
+6 a^8 b^4 w^8 h^2 - 12 a^7 b^5 w^8 h^2 - 12 a^6 b^6 w^8 h^2 -
+12 a^5 b^7 w^8 h^2 - 6 a^4 b^8 w^8 h^2\\ - 2 a^8 b^2 w^{10} h^2 -
+4 a^7 b^3 w^{10} h^2 - 10 a^6 b^4 w^{10} h^2 - 16 a^5 b^5 w^{10} h^2 -
+10 a^4 b^6 w^{10} h^2 - 4 a^3 b^7 w^{10} h^2\\ - 2 a^2 b^8 w^{10} h^2 -
+2 a^6 b^2 w^{12} h^2 - 4 a^5 b^3 w^{12} h^2 - 4 a^4 b^4 w^{12} h^2 -
+4 a^3 b^5 w^{12} h^2 - 2 a^2 b^6 w^{12} h^2\\ + a^8 b^4 w^6 h^4 +
+4 a^7 b^5 w^6 h^4 + 6 a^6 b^6 w^6 h^4 + 4 a^5 b^7 w^6 h^4 + a^4 b^8 w^6 h^4 +
+2 a^8 b^2 w^8 h^4\\ + 8 a^7 b^3 w^8 h^4 + 14 a^6 b^4 w^8 h^4 +
+16 a^5 b^5 w^8 h^4 + 14 a^4 b^6 w^8 h^4 + 8 a^3 b^7 w^8 h^4 +
+2 a^2 b^8 w^8 h^4\\ + a^8 w^{10} h^4 + 4 a^7 b w^{10} h^4 +
+10 a^6 b^2 w^{10} h^4 + 20 a^5 b^3 w^{10} h^4 + 26 a^4 b^4 w^{10} h^4
+\end{array}
+#+REVEAL: split
+
+\begin{array}[l]
+{} +
+20 a^3 b^5 w^{10} h^4 + 10 a^2 b^6 w^{10} h^4 + 4 a b^7 w^{10} h^4 +
+b^8 w^{10} h^4 + 2 a^6 w^{12} h^4 + 8 a^5 b w^{12} h^4\\ + 14 a^4 b^2 w^{12} h^4
++ 16 a^3 b^3 w^{12} h^4 + 14 a^2 b^4 w^{12} h^4 + 8 a b^5 w^{12} h^4 +
+2 b^6 w^{12} h^4\\ + a^4 w^{14} h^4 + 4 a^3 b w^{14} h^4 + 6 a^2 b^2 w^{14} h^4 +
+4 a b^3 w^{14} h^4 + b^4 w^{14} h^4
+\end{array}
+
+There are 523 (/five hundred and twenty three/) terms in this polynomial!
+
+* Solving the polynomial
+
+Or rather, trying to find simple versions of it which can be solved.  
+Can this be done?
+
+Can we find a solution with integer values?  In fact the values:
+
+\begin{align*}
+    w&=2500\\
+    a&=17500\\
+    b&=20000\\
+    h&=3213
+\end{align*}
+
+produce
+\[
+x=17500.
+\]
+
+(See paper for details.)
+
+* Further generalizations and questions
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Is there a simple function (like $u=A+B$) for which the polynomial is simpler?
+- What are the smallest all integer solutions?
+- What about ladders of /different/ widths?
+- Or alley walls not at 90\deg to the ground?
+
+- Over to you!
+
+* Problem 2: the ladder in the corner
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+Two corridors of different widths $a$ and $b$ meet at right angles.
+
+What is the longest ladder (or pole, or pipe) which can be carried
+round the corner?
+
+This is a very old problem.  One "abstract" version is:
+
+Given $(a,b)$ in the first quadrant, find the shortest line between
+the two positive axes that passes through $(a,b)$.
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :height 500px
+[[file:./corner_ladder1.jpg]]
+
+#+REVEAL_HTML: </div>
+
+* Solving this problem
+
+Easy with calculus and a diagram:
+
+#+ATTR_HTML: :height 300px
+[[file:./corner_ladder2.jpg]]
+
+We can define the length in terms of either $\theta$ or $x$; find the minimum,
+which is
+\[
+(a^{2/3}+b^{2/3})^{3/2}.
+\]
+
+* Generalizing this corner problem
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+As before, consider a non-zero width $c$.
+
+With $\theta$ as before:
+\begin{array}[l]
+a\cos^3\theta-b\sin^3\theta\\
+{}+c(\sin^2\theta-\cos^2\theta)=0.
+\end{array}
+or, with $t=\tan(\theta/2)$:
+\begin{array}[l]
+{}(a+c)t^6-(3a+5c)t^4+8bt^3\\
++(3a-5c)t^2-a+c=0.
+\end{array}
+A /sextic/ equation, so not in general solvable by radicals.
+#+REVEAL_HTML: </div>
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :height 500px
+[[file:./corner_ladder3.jpg]]
+
+#+REVEAL_HTML: </div>
+
+* Grappling with a sextic equation
+
+Maybe we can find values of $a$, $b$, $c$, for which either
+
+- the polynomial is solvable by radicals (it has a solvable Galois group)
+- it can be factorized into polynomials of degree 4 or less.
+
+In fact the polynomial with $a,b,c = 5,36,4$ has a solvable Galois
+group.  However, this polynomial is irreducible:
+\[
+9t^6 - 35t^4 + 288t^3 - 5t^2 - 1
+\]
+
+* Eliminating terms
+
+Recall that to simplify the general cubic equation
+\[
+x^3+ax^2+bx+c=0
+\]
+we substitute 
+\[
+x=y-a/3
+\]
+to obtain a cubic in $y$ without a square term:
+\[
+y^3-\frac{1}{3}(a^2-3b)y+c-\frac{1}{3}ab+\frac{2}{27}a^3=0.
+\]
+(This is called a /depressed cubic/).
+
+Such polynomial substitutions to eliminate variables are called
+/Tschirnhaus (or Tschirnhausen) transformations/ after Ehrenfried
+Walther von Tschirnhaus (1651--1708).
+
+#+REVEAL: split
+
+We will try to eliminate both the fourth (and fifth) terms, by use of a 
+transformation
+\[
+x = t^2+pt+q
+\]
+for some $p$ and $q$.  We will employ the /resultant/, which is an expression equal
+to zero if the polynomials share a root:
+
+#+BEGIN_SRC Python
+sage: a = 5;b = 36;c = 4;
+sage: L = (a+c)*t^6-(3*a+5*c)*t^4+8*b*t^3+(3*a-5*c)*t^2-a+c
+sage: R = L.resultant(x-t^2-p*t-q,t)
+sage: r5 = R.coefficients(x^5); r4 = R.coefficients(x^4); 
+sage: solve([r5==0,r4==0],p,q)
+#+END_SRC
+
+This leads to two solutions:
+\[
+p = -\frac{4\sqrt{926934}-3888}{315},\quad
+q = -\frac{35}{27}
+\]
+and
+\[
+p = \frac{4\sqrt{926934}+3888}{315},\quad
+q = -\frac{35}{27}
+\]
+
+#+REVEAL: split
+
+If we substitute into the resultant:
+
+#+BEGIN_SRC Python
+sage: R.subs(sol[0]).poly(x)
+#+END_SRC
+
+we get this lovely polynomial: 
+\begin{array}[l]
+{}81x^6
++ \left(\dfrac{197555534052032}{10418625}-\dfrac{2543982976}{128625} \, 
+\sqrt{926934}\right)x^3\\
+
++ \left(\dfrac{14349445546730752}{218791125}-\dfrac{554663767808}{8103375} \, 
+\sqrt{926934} \right)x^2\\
+
++ \left(\dfrac{1909957127210092544}{29536801875}-\dfrac{73941219915776}{1093955625} \, \sqrt{926934}\right)x\\
+
++ \dfrac{4805141242386194432}{205069795875} -\dfrac{4096}{108547746890625} \, 
+{\left(\sqrt{926934} - 972\right)}^{6}\\  
+{}\quad - \dfrac{62084749746176}{2531725875} \,
+ \sqrt{926934} 
+\end{array}
+
+* Another tack: factorization
+
+Leaving out the gory details:
+
+- Try to factorize
+\[
+t^6-\frac{35}{9}t^4+32t^3-\frac{5}{9}t^2-\frac{1}{9}=(t^3+r_1t^2+r_2t+r_3)(t^3+mt^2+nt+r_4)
+\]
+
+ - Expanding the right hand side and equating coefficients $t^5$,
+   $t^4$, $t^3$, $t^2$:
+\begin{align*}
+r_1&=-m,\quad r_2=-\dfrac{9n-9m^2+35}{9},\\
+r_3&=\dfrac{9n^2+(9m^2+35)n-9m^4+35m^2+288m-5}{18m},\\
+r_4&=-\frac{9n^2+(35-27m^2)n+9m^4-35m^2-288m-5}{18m} 
+\end{align*}
+
+#+REVEAL: split
+
+- Now substitute into equations for coefficients for $t$ and constant; 
+and form their resultant.  
+
+- Solving low degree factors and we find possible values:
+\[
+m=2\sqrt{5}+5,\; n=-\frac{5^{3/2}}{3},\; r_4=-\frac{2\sqrt{5}+5}{3\sqrt{5}}
+\]
+
+- Now solve
+\[
+t^3+mt^2+nt+r_4=0
+\]
+which is
+\[
+t^3+(2\sqrt{5}+5)t^2-\frac{5^{3/2}}{3}t-\frac{2\sqrt{5}+5}{3\sqrt{5}}=0
+\]
+
+#+REVEAL: split
+
+The real solution is
+\begin{array}[rl]
+  t=&\dfrac{5^{3/2}}{9}+\dfrac{\left(729(2^{3/2})\,
+ \sqrt{901\,\sqrt{5}+2041}-266(3^{7/2})\,\sqrt{5}-22(3^{
+   15/2})\right)^{1/3}}{3^{19/6}}\\
+   &\quad-\dfrac{2^{2/3}(27\sqrt{5}+5)}
+   {3^{11/6}\left(27\sqrt{2}\sqrt{901\sqrt{5}+2041}-133\sqrt{15}-
+     11(3^{9/2})\right)^{\!1/3}}
+\end{array}
+which is approximately 0.26092, and which corresponds to an angle of 29.247\deg.
+
+A triumph for computer algebra and /really complicated/ algebraic expressions.
+
+* Where to from here?
+
+Further generalizations include:
+
+- corridors not at right angles
+- shapes not being rectangular:
+- the "sofa problem" (Leo Moser, 1966) asks for the shape of largest
+  area which can be moved round a corner
+- still unsolved.
+
+- As before: over to you!

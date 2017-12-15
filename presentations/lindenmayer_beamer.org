@@ -1,0 +1,243 @@
+#+startuo: beamer
+#+OPTIONS: num:nil toc:nil timestamp:nil
+# #+REVEAL_TRANS: None
+# #+REVEAL_THEME: melbourne
+# #+REVEAL_THEME: robreact
+# #+OPTIONS: reveal_center:t 
+# #+OPTIONS: reveal_progress:t reveal_history:nil reveal_control:t
+# #+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+# #+OPTIONS: reveal_width:1200 reveal_height:800
+# #+OPTIONS: reveal_width:1200
+# #+OPTIONS: reveal_single_file:t
+# #+REVEAL_MARGIN: 0.1
+# #+REVEAL_MIN_SCALE: 0.5
+# #+REVEAL_MAX_SCALE: 2.5
+# #+REVEAL_HLEVEL: 2
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [bigger]
+#+BEAMER_FRAME_LEVEL: 2
+# #+REVEAL_HEAD_PREAMBLE: <meta name="description" content="Org-Reveal Introduction.">
+# #+REVEAL_POSTAMBLE: <p> Created by Alasdair </p>
+# #+REVEAL_PLUGINS: (highlight markdown notes menu)
+# #+REVEAL_HIGHLIGHT_CSS: file:///home/amca/Nextcloud/reveal.js/lib/styles/gruvbox-dark.css
+# #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+# #+REVEAL_EXTRA_CSS: bootstrap.css
+# #+REVEAL_EXTRA_CSS: ./local.css
+# #+REVEAL_MATHJAX_URL: "file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+# #+HTML_MATHJAX: file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+# #+REVEAL_SLIDE_FOOTER: Lindenmayer Systems: Alasdair McAndrew, ATCM2017
+#+Title: Lindenmayer Systems
+#+AUTHOR: Alasdair McAndrew@@html:<br><br>@@College of Engineering and Science@@html:<br>@@Victoria University,@@html:<br>@@Melbourne, Australia
+#+Email: Alasdair.McAndrew@vu.edu.au
+#+DATE: December, 2017
+
+* What is a Lindenmayer system?
+# #+ATTR_REVEAL: :frag (highlight-current-blue)
+- Designed to explore organic growth
+- Creates complex shapes from simple rules
+- For example, with the rules:
+  \[
+  \color{blue}{0\rightarrow 1},\qquad\color{red}{1\rightarrow 01}
+  \]
+  we have this string transformation:
+  \[
+  01101\color{blue}{0}\;\color{red}{1\;1}\;\color{blue}{0}\;\color{red}{1}
+  \longrightarrow\color{blue}{1}\;\color{red}{01\;01}\;\color{blue}{1}\;\color{red}{01}=10101101
+  \]
+- All operations take place /simultaneously/
+- L-systems are /term-rewriting systems/
+
+* Fractals: real... 
+#+ATTR_HTML: :width 1200 
+[[file:./trees2.jpg]]
+
+# trees was made by first brightening fractal_tree3,jpg and fractal_tree4.jpg, and 
+# combining them with montage:
+#   montage fractal_tree3b.jpg fractal_tree5.jpg fractal_tree4b.jpg -resize x2688 -geometry +0+0 trees.jpg
+# The "resize x2688" ensured that all images had the same height.
+
+All these lovely fractal trees in the city of Melbourne, Australia, in the winter.
+
+* Fractals are everywhere
+Once you start looking, you can't stop seeing them
+
+[[file:./out1.jpg]]
+# #+REVEAL: split
+[[file:./out2.jpg]]
+
+* Fractals: manufactured...
+#+ATTR_HTML: :width 1200 
+[[file:./agop.jpg]]
+
+These are all examples from /The Algorithmic Beauty of Plants/ by 
+Aristid Lindenmayer and Przemysław Prusinkiewicz, available at 
+http://algorithmicbotany.org/papers/abop/abop.pdf
+
+* Turning strings of symbols into pictures
+
+- Sets of rules describe how one string of symbols will be expanded to a new string
+- Each symbol corresponds to a /turtle graphics/ instruction:
+
+  - =F=: Move forward
+  - =-=: Turn left
+  - =+=: Turn right
+  - =[=: Memorize current position and heading
+  - =]=: Move to most recently memorized position and heading
+
+* An example
+
+# #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+For example, this sequence of symbols:
+@@html:<br><br>@@
+
+=F[+F]F[-F]F= 
+
+@@html:<br>@@
+has this output: 
+@@html:<br><br>@@
+
+We can clearly alter the output by changing the angle of the turns, 
+and the length of the move forward.
+
+In this example, the angle is 26\deg
+# #+REVEAL_HTML: </div>
+# #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+# #+ATTR_HTML: :height 500px
+[[file:./l_tree1.jpg]]
+ 
+# #+REVEAL_HTML: </div>
+
+* How turtle graphics works
+
+This shows how the turtle draws a path with branches:
+
+# #+ATTR_HTML: :width 1000px
+[[file:./growth.jpg]]
+
+* More on turtle graphics
+
+It's all done from the point of view of the turtle.  A side of /Koch's
+snowflake/ can be computed by the rules:
+
+- Start: =F=
+- Modify: =F= \rightarrow =F+F--F+F= (with turns of 60\deg)
+- At every further step, each =F= is replaced by the string =F+F--F+F=
+- The second iteration produces
+
+  =F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F=
+- The third iteration produces:
+
+  =F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F+F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F+F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F=
+- and so on...
+  
+* Turtle graphics /with pictures!/
+
+# #+REVEAL_HTML: <div class="column" style="float:left; text-align:right; width:50%">
+@@html:<br><br>@@
+First iteration:\nbsp
+@@html:<br><br><br>@@
+Second iteration:\nbsp
+@@html:<br><br><br>@@
+Third iteration:\nbsp
+@@html:<br><br><br>@@
+Fourth iteration:\nbsp
+# #+REVEAL_HTML: </div>
+# #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+# #+ATTR_HTML: :height 500px
+[[file:./koch_snowflake.jpg]]
+ 
+# #+REVEAL_HTML: </div>
+
+* Some mathematics
+
+Remember the =F= $\rightarrow$ =F+F--F+F= iteration?  How many symbols 
+are in the $n$^th string?
+
+Let $f_n$ be the number of =F='s, and $k_n$ be the number of other
+symbols in the $n$^th string. We have:
+
+\begin{eqnarray*}
+f_{n+1}&=&4f_n,\quad f_1=4\\
+k_{n+1}&=&4f_n+k_{n-1},\quad k_1=4
+\end{eqnarray*}
+
+It follows immediately that
+\[
+f_n=4^n\mbox{ and }k_n=4+4^2+4^3+\cdots+4^n=\frac{4}{3}(4^n-1).
+\]
+The total length is thus
+\[
+f_n+k_n=4^n+\frac{4}{3}(4^n-1)=\frac{1}{3}(7(4^n)-4).
+\]
+
+
+* The fractal plant in modern languages: Python
+
+#+BEGIN_SRC Python
+import turtle as t  # "turtle" is a turtle graphics module
+
+# Lindenmayer system (a) from ABOP figure 1.24(a), p 25
+def edgetree(level, size, angle):
+    if (level==0):
+        t.fd(size)
+    else:
+        edgetree(level-1, size/3, angle)
+        t.lt(angle)
+        edgetree(level-1, size/3, angle)
+        t.bk(size/3)
+        t.rt(angle)
+        edgetree(level-1, size/3, angle)
+        t.rt(angle)
+        edgetree(level-1, size/3, angle)
+        t.bk(size/3)
+        t.lt(angle)
+        edgetree(level-1, size/3, angle)
+#+END_SRC
+
+* The fractal plant in modern languages: Racket
+
+Racket is a modern lisp; descended from Scheme.
+#+BEGIN_SRC Scheme
+;;   F -> F[+F]F[-F]F
+
+(require furtle) ;; furtle is a simple but fast turtle graphics library
+(: ltree_b (-> Real Real Real TurtleF))  ;; typed Racket so must declare types
+(define (ltree level size angle)
+  (if (= level 0)
+      (turtles (forward size))
+      (turtles (ltree (- level 1) (/ size 3) angle)               ; F
+               (save)                                             ; [
+               (left angle) (ltree (- level 1) (/ size 3) angle)  ; +F
+               (restore)                                          ; ]
+               (ltree (- level 1) (/ size 3) angle)               ; F 
+               (save)                                             ; [
+               (right angle) (ltree (- level 1) (/ size 3) angle) ; -F
+               (restore)                                          ; ]
+               (ltree (- level 1) (/ size 3) angle))))            ; F
+#+END_SRC
+
+* Some more mathematics
+
+/Fractal dimension/ can be defined by the "box-counting measure":
+
+Suppose our picture is subdivided into boxes of size $b$, and $N(b)$ boxes 
+are needed to cover the shape.  Its dimension can be defined as
+\[
+\lim_{b\to 0}\frac{\log(N(b))}{\log(1/b)}.
+\]
+For example, take a curve of length $k$. As $b\to 0$, we would find that
+\[
+N(b)\to \frac{k}{b}.
+\]
+Thus
+\[
+\lim_{b\to 0}\frac{\log(N(b))}{\log(1/b)}=\lim_{b\to 0}\frac{\log(k/b)}{\log(1/b)}
+=\lim_{b\to 0}1-\frac{\log(k)}{\log(b)}=1.
+\]
+In general a fractal will have a non-integer dimension between 1 and 2.
+
+
+* The end
+
+Thanks, folks!
+

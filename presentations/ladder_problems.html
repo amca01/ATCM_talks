@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>A litany of ladders: easy problems with hard solutions</title>
+<meta name="author" content="(Alasdair McAndrew (export-snippet (:back-end html :value <br><br> :begin 18 :end 35 :post-blank 0 :parent #0)) College of Engineering and Science (export-snippet (:back-end html :value <br> :begin 69 :end 82 :post-blank 0 :parent #0)) Victoria University, (export-snippet (:back-end html :value <br> :begin 102 :end 115 :post-blank 0 :parent #0)) Melbourne, Australia)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./css/reveal.css"/>
+
+<link rel="stylesheet" href="./css/theme/melbourne.css" id="theme"/>
+
+<link rel="stylesheet" href="file:///home/amca/Nextcloud/reveal.js/lib/styles/gruvbox-dark.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Org-Reveal Introduction.">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">A litany of ladders: easy problems with hard solutions</h1><h2 class="author">Alasdair McAndrew<br><br>College of Engineering and Science<br>Victoria University,<br>Melbourne, Australia</h2><h2 class="date">December, 2017</h2>
+</section>
+
+<section>
+<section id="slide-orgfad7ab6">
+<h2 id="orgfad7ab6">Introduction</h2>
+<ul>
+<li class="fragment roll-in">Carl Gustav Jacobi: "Man muss immer generalisieren": <i>one must always generalize</i></li>
+<li class="fragment roll-in">But generalizing is <i>hard</i></li>
+<li class="fragment roll-in">(if you're not a genius)</li>
+<li class="fragment roll-in">However, a CAS can help</li>
+<li class="fragment roll-in"><b>This</b> talk consists of two case studies in the use of CAS to generalize two standard problems</li>
+<li class="fragment roll-in">And as we shall see, even a CAS can take us only so far&hellip;</li>
+
+</ul>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgb23a551">
+<h2 id="orgb23a551">Problem 1: crossed ladders</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+Two ladders of given lengths \(a\) and \(b\) are shown in an alley; the height of
+their crossing above the ground \(h\) is also given.
+</p>
+
+<p>
+How wide is the alley?
+</p>
+</div>
+<div class="column" style="float:left; width:50%">
+
+<div class="figure">
+<p><img src="./crossed_ladders1.jpg" alt="crossed_ladders1.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org7a649d3">
+<h2 id="org7a649d3">Solving the crossed ladders</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+Introduce some variables, then by similar triangles we find that
+\[
+\frac{1}{h}=\frac{1}{A}+\frac{1}{B}
+\]
+(this is the <i>crossed ladders theorem</i>), so that
+\[
+\frac{1}{h}=\frac{1}{\sqrt{a^2-x^2}}+\frac{1}{\sqrt{b^2-x^2}}
+\]
+All we have to do now is to turn this into a polynomial equation in \(x\).
+</p>
+</div>
+<div class="column" style="float:left; width:50%">
+
+<div class="figure">
+<p><img src="./crossed_ladders2.jpg" alt="crossed_ladders2.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd46c7d9">
+<h2 id="orgd46c7d9">Crossed ladders with a CAS:</h2>
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: R.&lt;a,b,h,x,A,B,y,z&gt; = PolynomialRing(QQ)
+sage: Id = R.ideal([A^2+x^2-a^2, B^2+x^2-b^2, y+z-x, y*B-x*h, z*A-x*h])
+sage: E = Id.elimination_ideal([A,B,y,z])
+sage: p = E.gen(0)
+sage: px = list(p.factor())[1][0].polynomial(x)
+</code></pre>
+</div>
+<p>
+which leads to:
+</p>
+
+<div>
+\begin{array}{l}
+    x^8+\left(-2 a^2-2 b^2+4 h^2\right) x^6+\left(a^4+4 a^2 b^2
+       +b^4-6 a^2 h^2-6 b^2 h^2\right) x^4\\
+    \qquad + \left(-2 a^4 b^2-2 a^2 b^4+2 a^4 h^2+8 a^2 b^2 h^2+2 b^4 h^2\right) x^2\\
+    \qquad +a^4 b^4-2 a^4 b^2 h^2-2 a^2 b^4 h^2+a^4 h^4-2 a^2 b^2 h^4
+       +b^4 h^4
+\end{array} 
+
+</div>
+
+<p>
+which is a quartic in \(x^2\).  
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org75f5f20">
+<h2 id="org75f5f20">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
+<p>
+We can try  a brute force program to look for values which lead to a polynomial 
+which can be factorized:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: var('w')    
+sage: for i in range(1,100):
+....:     for j in range(i+1,100):
+....:         for k in range(1,min(i,j)):
+....:             pp=px.subs(a=i,b=j,h=k,x=w)
+....:             pl = pp.factor_list()
+....:             if len(pl)&gt;2:
+....:                 print i,j,k,pp.factor()
+</code></pre>
+</div>
+
+<p>
+which leads to the possible values (without necessary scaling):
+</p>
+
+<div>
+\begin{align*}
+    a,b,h,x&=37,91,14,35\\
+    &=51,75,40,45\\
+    &=52,60,45,48\\
+    &=75,78,70,72
+\end{align*}
+
+</div>
+
+</section>
+<section >
+
+<p>
+Factoring into two quadratics; if \(a,b,h=20,28,15\) then we have
+</p>
+
+<p>
+\[
+(x^4 + 16x^2 - 108800)(x^4 - 1484x^2 + 563200)
+\]
+for which the only positive real solution is
+\[
+x = 2\sqrt{18\sqrt{2}-2}\approx 17.9428.
+\]
+</p>
+
+<p>
+Even easier: write \(u=A+B\), and solve for \(u\):
+\[
+u^4-4hu^3-(a^2-b^2)^2.
+\]
+We can obtain \(x\) from \(u\).
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgde66361">
+<h2 id="orgde66361">Generalizing the crossed ladders problem</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+Here is where it starts to get messy.  One simple(?) generalization:
+give the ladders a non-zero width
+</p>
+</div>
+<div class="column" style="float:left; width:50%">
+
+<div class="figure">
+<p><img src="./crossed_ladders3.jpg" alt="crossed_ladders3.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org2ab0ef8">
+<h2 id="org2ab0ef8">Starting the solution</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+As before, introduce some new variables which can be related by
+similar triangles and Pythagoras' theorem:
+</p>
+</div>
+<div class="column" style="float:left; width:50%">
+
+<div class="figure">
+<p><img src="./crossed_ladders4.jpg" alt="crossed_ladders4.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org128a6de">
+<h2 id="org128a6de">Obtaining the polynomial</h2>
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: R.&lt;a,b,w,h,x,p,q,r,s,y,z&gt; = PolynomialRing(QQ)
+sage: Id = R.ideal([p^2+q^2-w^2,r^2+s^2-w^2,q*b-w*(y+z+r),s*a-w*(y+z+p),\
+....: y*p-h*q,z*r-h*s,x-p-r-y-z])
+sage: E = Id.elimination_ideal([p,q,r,s,y,z])   
+sage: px = E.gen(0).polynomial(x)
+
+</code></pre>
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org89afb2a">
+<h2 id="org89afb2a">This is the polynomial:</h2>
+<div>
+\begin{array}[l]
+(a^4 b^4 w^2 - 2 a^2 b^2 w^6 + w^{10}) x^{12}\\
+ + (-4 a^4 b^3 w^3 h -
+4 a^3 b^4 w^3 h + 4 a^3 b^2 w^5 h + 4 a^2 b^3 w^5 h + 4 a^2 b w^7 h\\
+ + 4 a b^2 w^7 h - 4 a w^9 h - 4 b w^9 h) x^{11} + (-2 a^6 b^4 w^2 - 2 a^4 b^6 w^2
+- 4 a^4 b^4 w^4\\
+ + 6 a^4 b^2 w^6 + 6 a^2 b^4 w^6 + 4 a^2 b^2 w^8 - 4 a^2 w^{10}
+- 4 b^2 w^{10} + 4 a^4 b^4 w^2 h^2\\
+ + 4 a^4 b^2 w^4 h^2 - 8 a^3 b^3 w^4 h^2 +
+4 a^2 b^4 w^4 h^2 - 8 a^3 b w^6 h^2 + 8 a^2 b^2 w^6 h^2 - 8 a b^3 w^6 h^2\\
+ +4 a^2 w^8 h^2 - 8 a b w^8 h^2 + 4 b^2 w^8 h^2 + 4 w^{10} h^2) x^{10} +
+(8 a^6 b^3 w^3 h + 4 a^5 b^4 w^3 h\\
+ + 4 a^4 b^5 w^3 h + 8 a^3 b^6 w^3 h -
+8 a^5 b^2 w^5 h - 4 a^4 b^3 w^5 h - 4 a^3 b^4 w^5 h - 8 a^2 b^5 w^5 h\\
+ - 12 a^4 b w^7 h - 8 a^3 b^2 w^7 h - 8 a^2 b^3 w^7 h - 12 a b^4 w^7 h +
+12 a^3 w^9 h + 12 b^3 w^9 h\\
+ + 8 a w^{11} h + 8 b w^{11} h) x^9 + (a^8 b^4 w^2 +
+4 a^6 b^6 w^2 + a^4 b^8 w^2 + 8 a^6 b^4 w^4 + 8 a^4 b^6 w^4
+\end{array}
+
+</div>
+
+</section>
+<section >
+<div>
+\begin{array}[l]
+{} - 6 a^6 b^2 w^6 -
+16 a^4 b^4 w^6 - 6 a^2 b^6 w^6 - 8 a^4 b^2 w^8 - 8 a^2 b^4 w^8 + 6 a^4 w^{10}\\
++ 10 a^2 b^2 w^{10} + 6 b^4 w^{10} - 6 a^6 b^4 w^2 h^2 - 6 a^4 b^6 w^2 h^2 -
+10 a^6 b^2 w^4 h^2 + 24 a^5 b^3 w^4 h^2\\ + 24 a^3 b^5 w^4 h^2 -
+10 a^2 b^6 w^4 h^2 + 16 a^5 b w^6 h^2 - 20 a^4 b^2 w^6 h^2 +
+64 a^3 b^3 w^6 h^2 - 20 a^2 b^4 w^6 h^2\\ + 16 a b^5 w^6 h^2 - 6 a^4 w^8 h^2 +
+24 a^3 b w^8 h^2 - 60 a^2 b^2 w^8 h^2 + 24 a b^3 w^8 h^2 - 6 b^4 w^8 h^2\\ -
+22 a^2 w^{10} h^2 - 22 b^2 w^{10} h^2 - 4 w^{12} h^2) x^8
++ (-4 a^8 b^3 w^3 h
+- 8 a^6 b^5 w^3 h - 8 a^5 b^6 w^3 h\\ - 4 a^3 b^8 w^3 h + 4 a^7 b^2 w^5 h -
+4 a^6 b^3 w^5 h + 20 a^5 b^4 w^5 h + 20 a^4 b^5 w^5 h - 4 a^3 b^6 w^5 h\\ +
+4 a^2 b^7 w^5 h + 12 a^6 b w^7 h + 4 a^5 b^2 w^7 h + 28 a^4 b^3 w^7 h +
+28 a^3 b^4 w^7 h + 4 a^2 b^5 w^7 h\\ + 12 a b^6 w^7 h - 12 a^5 w^9 h +
+16 a^4 b w^9 h - 24 a^3 b^2 w^9 h - 24 a^2 b^3 w^9 h + 16 a b^4 w^9 h\\ -
+12 b^5 w^9 h - 16 a^3 w^{11} h - 16 a^2 b w^{11} h - 16 a b^2 w^{11} h -
+16 b^3 w^{11} h + 4 a^6 b^3 w^3 h^3\\ - 12 a^5 b^4 w^3 h^3 - 12 a^4 b^5 w^3 h^3 +
+4 a^3 b^6 w^3 h^3 + 4 a^6 b w^5 h^3 - 16 a^5 b^2 w^5 h^3 - 4 a^4 b^3 w^5 h^3\\ -
+4 a^3 b^4 w^5 h^3 - 16 a^2 b^5 w^5 h^3 + 4 a b^6 w^5 h^3 - 4 a^5 w^7 h^3 +
+8 a^4 b w^7 h^3 - 4 a^3 b^2 w^7 h^3\\ - 4 a^2 b^3 w^7 h^3 + 8 a b^4 w^7 h^3
+\end{array}
+
+</div>
+
+</section>
+<section >
+<div>
+\begin{array}[l]
+{}- 4 b^5 w^7 h^3 + 4 a^3 w^9 h^3 + 12 a^2 b w^9 h^3 + 12 a b^2 w^9 h^3 +
+4 b^3 w^9 h^3 + 8 a w^{11} h^3\\ + 8 b w^{11} h^3) x^7
++ (-2 a^8 b^6 w^2 -
+2 a^6 b^8 w^2 - 4 a^8 b^4 w^4 - 16 a^6 b^6 w^4 - 4 a^4 b^8 w^4\\ + 2 a^8 b^2 w^6
++ 14 a^6 b^4 w^6 + 14 a^4 b^6 w^6 + 2 a^2 b^8 w^6 + 4 a^6 b^2 w^8 +
+16 a^4 b^4 w^8\\ + 4 a^2 b^6 w^8 - 4 a^6 w^{10} - 10 a^4 b^2 w^{10} -
+10 a^2 b^4 w^{10} - 4 b^6 w^{10} + 2 a^8 b^4 w^2 h^2\\ + 8 a^6 b^6 w^2 h^2 +
+2 a^4 b^8 w^2 h^2 + 6 a^8 b^2 w^4 h^2 - 16 a^7 b^3 w^4 h^2 + 4 a^6 b^4 w^4 h^2
+- 52 a^5 b^5 w^4 h^2\\ + 4 a^4 b^6 w^4 h^2 - 16 a^3 b^7 w^4 h^2 +
+6 a^2 b^8 w^4 h^2 - 8 a^7 b w^6 h^2 + 24 a^6 b^2 w^6 h^2 - 92 a^5 b^3 w^6 h^2\\
++ 16 a^4 b^4 w^6 h^2 - 92 a^3 b^5 w^6 h^2 + 24 a^2 b^6 w^6 h^2 -
+8 a b^7 w^6 h^2 - 24 a^5 b w^8 h^2\\ + 80 a^4 b^2 w^8 h^2 - 80 a^3 b^3 w^8 h^2 +
+80 a^2 b^4 w^8 h^2 - 24 a b^5 w^8 h^2 + 14 a^4 w^{10} h^2 + 4 a^3 b w^{10} h^2\\
++ 120 a^2 b^2 w^{10} h^2 + 4 a b^3 w^{10} h^2 + 14 b^4 w^{10} h^2 +
+22 a^2 w^{12} h^2 + 20 a b w^{12} h^2\\ + 22 b^2 w^{12} h^2) x^6 +
+(4 a^8 b^5 w^3 h + 4 a^5 b^8 w^3 h + 4 a^8 b^3 w^5 h - 16 a^7 b^4 w^5 h\\ -
+16 a^6 b^5 w^5 h - 16 a^5 b^6 w^5 h - 16 a^4 b^7 w^5 h + 4 a^3 b^8 w^5 h -
+4 a^8 b w^7 h - 32 a^6 b^3 w^7 h
+\end{array}
+
+</div>
+
+</section>
+<section >
+<div>
+\begin{array}[l]
+{} - 16 a^5 b^4 w^7 h - 16 a^4 b^5 w^7 h -
+32 a^3 b^6 w^7 h - 4 a b^8 w^7 h + 4 a^7 w^9 h - 16 a^6 b w^9 h\\ +
+32 a^5 b^2 w^9 h + 8 a^4 b^3 w^9 h + 8 a^3 b^4 w^9 h + 32 a^2 b^5 w^9 h -
+16 a b^6 w^9 h + 4 b^7 w^9 h\\ + 8 a^5 w^{11} h + 8 a^4 b w^{11} h +
+32 a^3 b^2 w^{11} h + 32 a^2 b^3 w^{11} h + 8 a b^4 w^{11} h + 8 b^5 w^{11} h\\ -
+4 a^8 b^3 w^3 h^3 + 8 a^7 b^4 w^3 h^3 + 12 a^6 b^5 w^3 h^3 +
+12 a^5 b^6 w^3 h^3 + 8 a^4 b^7 w^3 h^3 - 4 a^3 b^8 w^3 h^3\\ - 4 a^8 b w^5 h^3 +
+12 a^7 b^2 w^5 h^3 - 12 a^6 b^3 w^5 h^3 + 28 a^5 b^4 w^5 h^3 +
+28 a^4 b^5 w^5 h^3 - 12 a^3 b^6 w^5 h^3\\ + 12 a^2 b^7 w^5 h^3 - 4 a b^8 w^5 h^3
++ 4 a^7 w^7 h^3 - 24 a^6 b w^7 h^3 + 24 a^5 b^2 w^7 h^3 - 36 a^4 b^3 w^7 h^3\\ -
+36 a^3 b^4 w^7 h^3 + 24 a^2 b^5 w^7 h^3 - 24 a b^6 w^7 h^3 + 4 b^7 w^7 h^3 +
+8 a^5 w^9 h^3 - 56 a^4 b w^9 h^3\\ - 32 a^3 b^2 w^9 h^3 - 32 a^2 b^3 w^9 h^3 -
+56 a b^4 w^9 h^3 + 8 b^5 w^9 h^3 - 4 a^3 w^{11} h^3\\ - 44 a^2 b w^{11} h^3 -
+44 a b^2 w^{11} h^3 - 4 b^3 w^{11} h^3 - 8 a w^{13} h^3 - 8 b w^{13} h^3) x^5
++(a^8 b^8 w^2\\ + 8 a^8 b^6 w^4 + 8 a^6 b^8 w^4 - 4 a^8 b^4 w^6 - 10 a^6 b^6 w^6
+- 4 a^4 b^8 w^6 - 8 a^6 b^4 w^8\\ - 8 a^4 b^6 w^8 + a^8 w^{10} +
+6 a^6 b^2 w^{10} + 3 a^4 b^4 w^{10} + 6 a^2 b^6 w^{10} + b^8 w^{10}\\ -
+2 a^8 b^6 w^2 h^2 - 2 a^6 b^8 w^2 h^2 - 4 a^8 b^4 w^4 h^2 + 28 a^7 b^5 w^4 h^2
+- 4 a^6 b^6 w^4 h^2 + 28 a^5 b^7 w^4 h^2\\ - 4 a^4 b^8 w^4 h^2 -
+8 a^8 b^2 w^6 h^2 + 36 a^7 b^3 w^6 h^2 - 16 a^6 b^4 w^6 h^2 +
+96 a^5 b^5 w^6 h^2 
+\end{array}
+
+</div>
+
+</section>
+<section >
+<div>
+\begin{array}[l]
+{}- 16 a^4 b^6 w^6 h^2 + 36 a^3 b^7 w^6 h^2 -
+8 a^2 b^8 w^6 h^2 + 2 a^8 w^8 h^2 + 8 a^7 b w^8 h^2 - 36 a^6 b^2 w^8 h^2\\ +
+52 a^5 b^3 w^8 h^2 - 92 a^4 b^4 w^8 h^2 + 52 a^3 b^5 w^8 h^2 -
+36 a^2 b^6 w^8 h^2 + 8 a b^7 w^8 h^2 + 2 b^8 w^8 h^2\\
+ + 6 a^6 w^{10} h^2 -
+8 a^5 b w^{10} h^2 - 108 a^4 b^2 w^{10} h^2 - 24 a^3 b^3 w^{10} h^2 -
+108 a^2 b^4 w^{10} h^2\\ - 8 a b^5 w^{10} h^2 + 6 b^6 w^{10} h^2 -
+24 a^3 b w^{12} h^2 - 84 a^2 b^2 w^{12} h^2 - 24 a b^3 w^{12} h^2 +
+a^8 b^4 w^2 h^4\\ - 2 a^6 b^6 w^2 h^4 + a^4 b^8 w^2 h^4 + 2 a^8 b^2 w^4 h^4 +
+2 a^6 b^4 w^4 h^4 + 8 a^5 b^5 w^4 h^4\\ + 2 a^4 b^6 w^4 h^4 + 2 a^2 b^8 w^4 h^4
++ a^8 w^6 h^4 + 10 a^6 b^2 w^6 h^4 + 16 a^5 b^3 w^6 h^4 + 10 a^4 b^4 w^6 h^4\\ +
+16 a^3 b^5 w^6 h^4 + 10 a^2 b^6 w^6 h^4 + b^8 w^6 h^4 + 6 a^6 w^8 h^4 +
+8 a^5 b w^8 h^4 + 18 a^4 b^2 w^8 h^4\\ + 32 a^3 b^3 w^8 h^4 + 18 a^2 b^4 w^8 h^4
++ 8 a b^5 w^8 h^4 + 6 b^6 w^8 h^4 + 9 a^4 w^{10} h^4 + 16 a^3 b w^{10} h^4\\ +
+14 a^2 b^2 w^{10} h^4 + 16 a b^3 w^{10} h^4 + 9 b^4 w^{10} h^4 +
+4 a^2 w^{12} h^4 + 8 a b w^{12} h^4 + 4 b^2 w^{12} h^4) x^4
+\end{array}
+
+</div>
+</section>
+<section >
+
+<div>
+\begin{array}[l]
+{}+ (4 a^8 b^5 w^5 h
++ 20 a^7 b^6 w^5 h + 20 a^6 b^7 w^5 h + 4 a^5 b^8 w^5 h + 12 a^8 b^3 w^7 h +
+20 a^6 b^5 w^7 h\\ + 20 a^5 b^6 w^7 h + 12 a^3 b^8 w^7 h + 4 a^8 b w^9 h -
+8 a^7 b^2 w^9 h + 8 a^6 b^3 w^9 h - 28 a^5 b^4 w^9 h\\ - 28 a^4 b^5 w^9 h +
+8 a^3 b^6 w^9 h - 8 a^2 b^7 w^9 h + 4 a b^8 w^9 h - 16 a^5 b^2 w^{11} h -
+16 a^4 b^3 w^{11} h\\ - 16 a^3 b^4 w^{11} h - 16 a^2 b^5 w^{11} h - 8 a^7 b^6 w^3 h^3
+- 8 a^6 b^7 w^3 h^3 + 8 a^8 b^3 w^5 h^3 - 12 a^7 b^4 w^5 h^3\\ -
+4 a^6 b^5 w^5 h^3 - 4 a^5 b^6 w^5 h^3 - 12 a^4 b^7 w^5 h^3 + 8 a^3 b^8 w^5 h^3
++ 8 a^8 b w^7 h^3 - 8 a^7 b^2 w^7 h^3\\ + 44 a^6 b^3 w^7 h^3 +
+20 a^5 b^4 w^7 h^3 + 20 a^4 b^5 w^7 h^3 + 44 a^3 b^6 w^7 h^3 -
+8 a^2 b^7 w^7 h^3 + 8 a b^8 w^7 h^3\\ - 4 a^7 w^9 h^3 + 40 a^6 b w^9 h^3 +
+20 a^5 b^2 w^9 h^3 + 104 a^4 b^3 w^9 h^3 + 104 a^3 b^4 w^9 h^3\\ +
+20 a^2 b^5 w^9 h^3 + 40 a b^6 w^9 h^3 - 4 b^7 w^9 h^3 - 4 a^5 w^{11} h^3 +
+72 a^4 b w^{11} h^3 + 68 a^3 b^2 w^{11} h^3\\ + 68 a^2 b^3 w^{11} h^3 +
+72 a b^4 w^{11} h^3 - 4 b^5 w^{11} h^3 + 40 a^2 b w^{13} h^3 +
+40 a b^2 w^{13} h^3) x^3
+\end{array}
+
+</div>
+</section>
+<section >
+
+<div>
+\begin{array}[l]
+{} + (-4 a^8 b^8 w^4 + 2 a^8 b^6 w^6 + 2 a^6 b^8 w^6 +
+4 a^6 b^6 w^8 - 2 a^8 b^2 w^{10} - 2 a^2 b^8 w^{10}\\ + 2 a^8 b^6 w^4 h^2 -
+12 a^7 b^7 w^4 h^2 + 2 a^6 b^8 w^4 h^2 - 20 a^7 b^5 w^6 h^2 +
+24 a^6 b^6 w^6 h^2 - 20 a^5 b^7 w^6 h^2\\ + 4 a^7 b^3 w^8 h^2 +
+44 a^6 b^4 w^8 h^2 - 16 a^5 b^5 w^8 h^2 + 44 a^4 b^6 w^8 h^2 +
+4 a^3 b^7 w^8 h^2 - 2 a^8 w^{10} h^2\\ + 4 a^7 b w^{10} h^2 +
+24 a^6 b^2 w^{10} h^2 + 24 a^5 b^3 w^{10} h^2 + 76 a^4 b^4 w^{10} h^2 +
+24 a^3 b^5 w^{10} h^2 + 24 a^2 b^6 w^{10} h^2\\ + 4 a b^7 w^{10} h^2 -
+2 b^8 w^{10} h^2 - 2 a^6 w^{12} h^2 + 4 a^5 b w^{12} h^2 +
+28 a^4 b^2 w^{12} h^2 + 28 a^3 b^3 w^{12} h^2\\ + 28 a^2 b^4 w^{12} h^2 +
+4 a b^5 w^{12} h^2 - 2 b^6 w^{12} h^2 - 2 a^8 b^4 w^4 h^4 - 4 a^7 b^5 w^4 h^4
+- 4 a^6 b^6 w^4 h^4\\ - 4 a^5 b^7 w^4 h^4 - 2 a^4 b^8 w^4 h^4 -
+4 a^8 b^2 w^6 h^4 - 8 a^7 b^3 w^6 h^4 - 16 a^6 b^4 w^6 h^4 -
+24 a^5 b^5 w^6 h^4\\ - 16 a^4 b^6 w^6 h^4 - 8 a^3 b^7 w^6 h^4 -
+4 a^2 b^8 w^6 h^4 - 2 a^8 w^8 h^4 - 4 a^7 b w^8 h^4 - 20 a^6 b^2 w^8 h^4\\ -
+36 a^5 b^3 w^8 h^4 - 36 a^4 b^4 w^8 h^4 - 36 a^3 b^5 w^8 h^4 -
+20 a^2 b^6 w^8 h^4 - 4 a b^7 w^8 h^4 - 2 b^8 w^8 h^4\\ - 8 a^6 w^{10} h^4 -
+16 a^5 b w^{10} h^4 - 32 a^4 b^2 w^{10} h^4 - 48 a^3 b^3 w^{10} h^4 -
+32 a^2 b^4 w^{10} h^4 - 16 a b^5 w^{10} h^4\\ - 8 b^6 w^{10} h^4 -
+10 a^4 w^{12} h^4 - 20 a^3 b w^{12} h^4 - 20 a^2 b^2 w^{12} h^4 -
+20 a b^3 w^{12} h^4 - 10 b^4 w^{12} h^4\\ - 4 a^2 w^{14} h^4 - 8 a b w^{14} h^4 -
+4 b^2 w^{14} h^4) x^2
+\end{array}
+
+</div>
+</section>
+<section >
+
+<div>
+\begin{array}[l]
+{}+ (-8 a^8 b^7 w^5 h - 8 a^7 b^8 w^5 h - 8 a^8 b^5 w^7 h -
+8 a^5 b^8 w^7 h - 4 a^8 b^3 w^9 h + 4 a^7 b^4 w^9 h\\ + 8 a^6 b^5 w^9 h +
+8 a^5 b^6 w^9 h + 4 a^4 b^7 w^9 h - 4 a^3 b^8 w^9 h + 8 a^5 b^4 w^{11} h +
+8 a^4 b^5 w^{11} h\\ - 4 a^8 b^3 w^7 h^3 - 12 a^7 b^4 w^7 h^3 - 16 a^6 b^5 w^7 h^3
+- 16 a^5 b^6 w^7 h^3 - 12 a^4 b^7 w^7 h^3 - 4 a^3 b^8 w^7 h^3\\ -
+4 a^8 b w^9 h^3 - 12 a^7 b^2 w^9 h^3 - 28 a^6 b^3 w^9 h^3 - 52 a^5 b^4 w^9 h^3
+- 52 a^4 b^5 w^9 h^3 - 28 a^3 b^6 w^9 h^3\\ - 12 a^2 b^7 w^9 h^3 -
+4 a b^8 w^9 h^3 - 12 a^6 b w^{11} h^3 - 36 a^5 b^2 w^{11} h^3 -
+48 a^4 b^3 w^{11} h^3 - 48 a^3 b^4 w^{11} h^3\\ - 36 a^2 b^5 w^{11} h^3 -
+12 a b^6 w^{11} h^3 - 8 a^4 b w^{13} h^3 - 24 a^3 b^2 w^{13} h^3 -
+24 a^2 b^3 w^{13} h^3 - 8 a b^4 w^{13} h^3) x\\ + a^8 b^4 w^{10} - 2 a^6 b^6 w^{10}
++ a^4 b^8 w^{10} - 4 a^8 b^6 w^6 h^2 - 8 a^7 b^7 w^6 h^2 - 4 a^6 b^8 w^6 h^2\\ -
+6 a^8 b^4 w^8 h^2 - 12 a^7 b^5 w^8 h^2 - 12 a^6 b^6 w^8 h^2 -
+12 a^5 b^7 w^8 h^2 - 6 a^4 b^8 w^8 h^2\\ - 2 a^8 b^2 w^{10} h^2 -
+4 a^7 b^3 w^{10} h^2 - 10 a^6 b^4 w^{10} h^2 - 16 a^5 b^5 w^{10} h^2 -
+10 a^4 b^6 w^{10} h^2 - 4 a^3 b^7 w^{10} h^2\\ - 2 a^2 b^8 w^{10} h^2 -
+2 a^6 b^2 w^{12} h^2 - 4 a^5 b^3 w^{12} h^2 - 4 a^4 b^4 w^{12} h^2 -
+4 a^3 b^5 w^{12} h^2 - 2 a^2 b^6 w^{12} h^2\\ + a^8 b^4 w^6 h^4 +
+4 a^7 b^5 w^6 h^4 + 6 a^6 b^6 w^6 h^4 + 4 a^5 b^7 w^6 h^4 + a^4 b^8 w^6 h^4 +
+2 a^8 b^2 w^8 h^4\\ + 8 a^7 b^3 w^8 h^4 + 14 a^6 b^4 w^8 h^4 +
+16 a^5 b^5 w^8 h^4 + 14 a^4 b^6 w^8 h^4 + 8 a^3 b^7 w^8 h^4 +
+2 a^2 b^8 w^8 h^4\\ + a^8 w^{10} h^4 + 4 a^7 b w^{10} h^4 +
+10 a^6 b^2 w^{10} h^4 + 20 a^5 b^3 w^{10} h^4 + 26 a^4 b^4 w^{10} h^4
+\end{array}
+
+</div>
+</section>
+<section >
+
+<div>
+\begin{array}[l]
+{} +
+20 a^3 b^5 w^{10} h^4 + 10 a^2 b^6 w^{10} h^4 + 4 a b^7 w^{10} h^4 +
+b^8 w^{10} h^4 + 2 a^6 w^{12} h^4 + 8 a^5 b w^{12} h^4\\ + 14 a^4 b^2 w^{12} h^4
++ 16 a^3 b^3 w^{12} h^4 + 14 a^2 b^4 w^{12} h^4 + 8 a b^5 w^{12} h^4 +
+2 b^6 w^{12} h^4\\ + a^4 w^{14} h^4 + 4 a^3 b w^{14} h^4 + 6 a^2 b^2 w^{14} h^4 +
+4 a b^3 w^{14} h^4 + b^4 w^{14} h^4
+\end{array}
+
+</div>
+
+<p>
+There are 523 (<i>five hundred and twenty three</i>) terms in this polynomial!
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org144e08e">
+<h2 id="org144e08e">Solving the polynomial</h2>
+<p>
+Or rather, trying to find simple versions of it which can be solved.  
+Can this be done?
+</p>
+
+<p>
+Can we find a solution with integer values?  In fact the values:
+</p>
+
+<div>
+\begin{align*}
+    w&=2500\\
+    a&=17500\\
+    b&=20000\\
+    h&=3213
+\end{align*}
+
+</div>
+
+<p>
+produce
+\[
+x=17500.
+\]
+</p>
+
+<p>
+(See paper for details.)
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgce220f2">
+<h2 id="orgce220f2">Further generalizations and questions</h2>
+<ul>
+<li class="fragment roll-in">Is there a simple function (like \(u=A+B\)) for which the polynomial is simpler?</li>
+<li class="fragment roll-in">What are the smallest all integer solutions?</li>
+<li class="fragment roll-in">What about ladders of <i>different</i> widths?</li>
+<li class="fragment roll-in">Or alley walls not at 90&deg; to the ground?</li>
+
+<li class="fragment roll-in">Over to you!</li>
+
+</ul>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd919677">
+<h2 id="orgd919677">Problem 2: the ladder in the corner</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+Two corridors of different widths \(a\) and \(b\) meet at right angles.
+</p>
+
+<p>
+What is the longest ladder (or pole, or pipe) which can be carried
+round the corner?
+</p>
+
+<p>
+This is a very old problem.  One "abstract" version is:
+</p>
+
+<p>
+Given \((a,b)\) in the first quadrant, find the shortest line between
+the two positive axes that passes through \((a,b)\).
+</p>
+</div>
+<div class="column" style="float:left; width:50%">
+
+<div class="figure">
+<p><img src="./corner_ladder1.jpg" alt="corner_ladder1.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org3b1f9cd">
+<h2 id="org3b1f9cd">Solving this problem</h2>
+<p>
+Easy with calculus and a diagram:
+</p>
+
+
+<div class="figure">
+<p><img src="./corner_ladder2.jpg" alt="corner_ladder2.jpg" height="300px" />
+</p>
+</div>
+
+<p>
+We can define the length in terms of either \(\theta\) or \(x\); find the minimum,
+which is
+\[
+(a^{2/3}+b^{2/3})^{3/2}.
+\]
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org59b003c">
+<h2 id="org59b003c">Generalizing this corner problem</h2>
+<div class="column" style="float:left; width:50%">
+<p>
+As before, consider a non-zero width \(c\).
+</p>
+
+<p>
+With \(\theta\) as before:
+</p>
+<div>
+\begin{array}[l]
+a\cos^3\theta-b\sin^3\theta\\
+{}+c(\sin^2\theta-\cos^2\theta)=0.
+\end{array}
+
+</div>
+<p>
+or, with \(t=\tan(\theta/2)\):
+</p>
+<div>
+\begin{array}[l]
+{}(a+c)t^6-(3a+5c)t^4+8bt^3\\
++(3a-5c)t^2-a+c=0.
+\end{array}
+
+</div>
+<p>
+A <i>sextic</i> equation, so not in general solvable by radicals.
+</p>
+</div>
+<div class="column" style="float:left; width:50%">
+
+<div class="figure">
+<p><img src="./corner_ladder3.jpg" alt="corner_ladder3.jpg" height="500px" />
+</p>
+</div>
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-orgfc7c45e">
+<h2 id="orgfc7c45e">Grappling with a sextic equation</h2>
+<p>
+Maybe we can find values of \(a\), \(b\), \(c\), for which either
+</p>
+
+<ul>
+<li>the polynomial is solvable by radicals (it has a solvable Galois group)</li>
+<li>it can be factorized into polynomials of degree 4 or less.</li>
+
+</ul>
+
+<p>
+In fact the polynomial with \(a,b,c = 5,36,4\) has a solvable Galois
+group.  However, this polynomial is irreducible:
+\[
+9t^6 - 35t^4 + 288t^3 - 5t^2 - 1
+\]
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org1ade82f">
+<h2 id="org1ade82f">Eliminating terms</h2>
+<p>
+Recall that to simplify the general cubic equation
+\[
+x^3+ax^2+bx+c=0
+\]
+we substitute 
+\[
+x=y-a/3
+\]
+to obtain a cubic in \(y\) without a square term:
+\[
+y^3-\frac{1}{3}(a^2-3b)y+c-\frac{1}{3}ab+\frac{2}{27}a^3=0.
+\]
+(This is called a <i>depressed cubic</i>).
+</p>
+
+<p>
+Such polynomial substitutions to eliminate variables are called
+<i>Tschirnhaus (or Tschirnhausen) transformations</i> after Ehrenfried
+Walther von Tschirnhaus (1651&#x2013;1708).
+</p>
+
+</section>
+<section >
+
+<p>
+We will try to eliminate both the fourth (and fifth) terms, by use of a 
+transformation
+\[
+x = t^2+pt+q
+\]
+for some \(p\) and \(q\).  We will employ the <i>resultant</i>, which is an expression equal
+to zero if the polynomials share a root:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: a = 5;b = 36;c = 4;
+sage: L = (a+c)*t^6-(3*a+5*c)*t^4+8*b*t^3+(3*a-5*c)*t^2-a+c
+sage: R = L.resultant(x-t^2-p*t-q,t)
+sage: r5 = R.coefficients(x^5); r4 = R.coefficients(x^4); 
+sage: solve([r5==0,r4==0],p,q)
+</code></pre>
+</div>
+
+<p>
+This leads to two solutions:
+\[
+p = -\frac{4\sqrt{926934}-3888}{315},\quad
+q = -\frac{35}{27}
+\]
+and
+\[
+p = \frac{4\sqrt{926934}+3888}{315},\quad
+q = -\frac{35}{27}
+\]
+</p>
+
+</section>
+<section >
+
+<p>
+If we substitute into the resultant:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: R.subs(sol[0]).poly(x)
+</code></pre>
+</div>
+
+<p>
+we get this lovely polynomial: 
+</p>
+<div>
+\begin{array}[l]
+{}81x^6
++ \left(\dfrac{197555534052032}{10418625}-\dfrac{2543982976}{128625} \, 
+\sqrt{926934}\right)x^3\\
+
++ \left(\dfrac{14349445546730752}{218791125}-\dfrac{554663767808}{8103375} \, 
+\sqrt{926934} \right)x^2\\
+
++ \left(\dfrac{1909957127210092544}{29536801875}-\dfrac{73941219915776}{1093955625} \, \sqrt{926934}\right)x\\
+
++ \dfrac{4805141242386194432}{205069795875} -\dfrac{4096}{108547746890625} \, 
+{\left(\sqrt{926934} - 972\right)}^{6}\\  
+{}\quad - \dfrac{62084749746176}{2531725875} \,
+ \sqrt{926934} 
+\end{array}
+
+</div>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+<section>
+<section id="slide-org93db439">
+<h2 id="org93db439">Another tack: factorization</h2>
+<p>
+Leaving out the gory details:
+</p>
+
+<ul>
+<li>Try to factorize</li>
+
+</ul>
+<p>
+\[
+t^6-\frac{35}{9}t^4+32t^3-\frac{5}{9}t^2-\frac{1}{9}=(t^3+r_1t^2+r_2t+r_3)(t^3+mt^2+nt+r_4)
+\]
+</p>
+
+<ul>
+<li>Expanding the right hand side and equating coefficients \(t^5\),
+\(t^4\), \(t^3\), \(t^2\):</li>
+
+</ul>
+<div>
+\begin{align*}
+r_1&=-m,\quad r_2=-\dfrac{9n-9m^2+35}{9},\\
+r_3&=\dfrac{9n^2+(9m^2+35)n-9m^4+35m^2+288m-5}{18m},\\
+r_4&=-\frac{9n^2+(35-27m^2)n+9m^4-35m^2-288m-5}{18m} 
+\end{align*}
+
+</div>
+
+</section>
+<section >
+
+<ul>
+<li>Now substitute into equations for coefficients for \(t\) and constant;</li>
+
+</ul>
+<p>
+and form their resultant.  
+</p>
+
+<ul>
+<li>Solving low degree factors and we find possible values:</li>
+
+</ul>
+<p>
+\[
+m=2\sqrt{5}+5,\; n=-\frac{5^{3/2}}{3},\; r_4=-\frac{2\sqrt{5}+5}{3\sqrt{5}}
+\]
+</p>
+
+<ul>
+<li>Now solve</li>
+
+</ul>
+<p>
+\[
+t^3+mt^2+nt+r_4=0
+\]
+which is
+\[
+t^3+(2\sqrt{5}+5)t^2-\frac{5^{3/2}}{3}t-\frac{2\sqrt{5}+5}{3\sqrt{5}}=0
+\]
+</p>
+
+</section>
+<section >
+
+<p>
+The real solution is
+</p>
+<div>
+\begin{array}[rl]
+  t=&\dfrac{5^{3/2}}{9}+\dfrac{\left(729(2^{3/2})\,
+ \sqrt{901\,\sqrt{5}+2041}-266(3^{7/2})\,\sqrt{5}-22(3^{
+   15/2})\right)^{1/3}}{3^{19/6}}\\
+   &\quad-\dfrac{2^{2/3}(27\sqrt{5}+5)}
+   {3^{11/6}\left(27\sqrt{2}\sqrt{901\sqrt{5}+2041}-133\sqrt{15}-
+     11(3^{9/2})\right)^{\!1/3}}
+\end{array}
+
+</div>
+<p>
+which is approximately 0.26092, and which corresponds to an angle of 29.247&deg;.
+</p>
+
+<p>
+A triumph for computer algebra and <i>really complicated</i> algebraic expressions.
+</p>
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
+</section>
+</div>
+</div>
+<p> Created by Alasdair </p>
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'h/v',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 900,
+minScale: 0.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'None', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+]
+});
+</script>
+</body>
+</html>

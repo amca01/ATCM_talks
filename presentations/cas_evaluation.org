@@ -1,0 +1,201 @@
+#+OPTIONS: num:nil toc:nil timestamp:nil
+#+REVEAL_TRANS: None
+#+REVEAL_THEME: melbourne
+# #+REVEAL_THEME: robreact
+# #+OPTIONS: reveal_center:t 
+#+OPTIONS: reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+# #+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_width:1200
+# #+OPTIONS: reveal_single_file:t
+# #+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+# #+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_HLEVEL: 2
+#+REVEAL_HEAD_PREAMBLE: <meta name="description" content="Org-Reveal Introduction.">
+#+REVEAL_POSTAMBLE: <p> Created by Alasdair </p>
+#+REVEAL_PLUGINS: (highlight markdown notes menu)
+#+REVEAL_HIGHLIGHT_CSS: file:///home/amca/Nextcloud/reveal.js/lib/styles/gruvbox-dark.css
+# #+REVEAL_EXTRA_CSS: bootstrap.css
+# #+REVEAL_EXTRA_CSS: ./local.css
+# #+REVEAL_MATHJAX_URL: "file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+HTML_MATHJAX: file:///usr/share/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+#+REVEAL_SLIDE_Header: Evaluating CAS for teaching & learning: Alasdair McAndrew, ATCM2017
+#+Title: A framework for evaluating computer algebra systems for mathematics teaching and learning
+#+AUTHOR: Alasdair McAndrew@@html:<br><br>@@College of Engineering and Science@@html:<br>@@Victoria University,@@html:<br>@@Melbourne, Australia
+#+Email: Alasdair.McAndrew@vu.edu.au
+#+DATE: December, 2017
+
+* Some definitions
+#+ATTR_REVEAL: :frag (roll-in)
+- A /computer algebra system/ or CAS is a computer system which can perform 
+  symmbolic, as well as numerical and graphical, operations
+
+- they can be computer based or handheld
+
+  examples include: Mathematica, Maple, MuPAD (now Matlab Symbolic Toolbox), 
+  Macsyma (reborn as GNU Maxima), Axiom, Sage, SymPy, TI-nspire CAS,
+  Casio ClassPad, HP Prime, lots of others
+
+- have been used in teaching since their inception
+
+- there are two main schools of use:
+
+  - students must not use a CAS until they have mastered the basics of algebra!
+  - students should use CAS for experimentation right from the beginning, and
+     construct their own understandings
+
+* Software evaluation: ISO9126
+
+A generic framework:
+
+|-------------------+---------------------------------------------------|
+| Criterion         | Meaning                                           |
+|-------------------+---------------------------------------------------|
+| Functionality     | how well the software performs its task           |
+|-------------------+---------------------------------------------------|
+| Reliability       | fault tolerance and handling of errors);          |
+|-------------------+---------------------------------------------------|
+| Usability         | how easy the software is to learn, user interface |
+|-------------------+---------------------------------------------------|
+| Efficiency        | response time and resource management             |
+|-------------------+---------------------------------------------------|
+| Maintainability   | fault diagnosis, modifiability, testability       |
+|-------------------+---------------------------------------------------|
+| Portability       | environmental flexibility, ease of installation   |
+|-------------------+---------------------------------------------------|
+| Legal complaiance | compliance with laws and regulations              |
+|-------------------+---------------------------------------------------|
+
+* Software evaluation: ACTIONS
+
+Designed to evaluation software for distance learning:
+
+|-------------------------------------+-----------------------------|
+| Criterion                           | Meaning                     |
+|-------------------------------------+-----------------------------|
+| Access                              | all pretty self-explanatory |
+|-------------------------------------+-----------------------------|
+| Cost                                |                             |
+|-------------------------------------+-----------------------------|
+| Teaching & Learning                 |                             |
+|-------------------------------------+-----------------------------|
+| Interactivity and user-friendliness |                             |
+|-------------------------------------+-----------------------------|
+| Organizational issues               |                             |
+|-------------------------------------+-----------------------------|
+| Novelty                             |                             |
+|-------------------------------------+-----------------------------|
+| Speed                               |                             |
+|-------------------------------------+-----------------------------|
+
+*Note:* because of huge variability, "teaching and learning is a weak
+discriminator for selecting and using technologies"
+
+* Comparisons
+
+|------------------+-----------------------------------|
+| ISO 9126         | ACTIONS                           |
+|------------------+-----------------------------------|
+| Functionality    |                                   |
+|------------------+-----------------------------------|
+| Reliability      |                                   |
+|------------------+-----------------------------------|
+| Usability        | Interactivity & user-friendliness |
+|------------------+-----------------------------------|
+| Efficieny        | Speed                             |
+|------------------+-----------------------------------|
+| Maintainability  |                                   |
+|------------------+-----------------------------------|
+| Portability      | Access & Cost                     |
+|------------------+-----------------------------------|
+| Legal compliance |                                   |
+|------------------+-----------------------------------|
+|                  | Teaching & Learning               |
+|------------------+-----------------------------------|
+|                  | Organizational Issues             |
+|------------------+-----------------------------------|
+|                  | Novelty                           |
+|------------------+-----------------------------------|
+
+* A hybrid model: FACTIONS!
+
+
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Criterion                             | Meaning                                                                          |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Functionality, or fitness for purpose | Must manage all mathematics in the course                                        |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Access                                | by all students, at all times                                                    |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Cost                                  | initial purchase, deployment, upkeep, maintenance, licencing...                  |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Teaching & Learning                   |                                                                                  |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Interactivity and user-friendliness   | Must fit the needs of the /students/ more than the /teacher/                     |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Organizational issues                 | Fit in with current policies and practices                                       |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Novelty                               | Should be seen as something new and exciting                                     |
+|---------------------------------------+----------------------------------------------------------------------------------|
+| Students                              | Different cohorts require difference approaches, and possibly different software |
+|---------------------------------------+----------------------------------------------------------------------------------|
+
+* Case study 1: first year engineering mathematics
+
+|---------------------------------------+--------+----------------+-------|
+| Criterion                             | Matlab | CAS Calculator | Maple |
+|---------------------------------------+--------+----------------+-------|
+| Functionality, or fitness for purpose |      2 |              2 |     2 |
+|---------------------------------------+--------+----------------+-------|
+| Access                                |      2 |              1 |     0 |
+|---------------------------------------+--------+----------------+-------|
+| Cost                                  |      2 |              1 |     0 |
+|---------------------------------------+--------+----------------+-------|
+| Teaching & Learning                   |      1 |              2 |     1 |
+|---------------------------------------+--------+----------------+-------|
+| Interactivity and user-friendliness   |      2 |              2 |     2 |
+|---------------------------------------+--------+----------------+-------|
+| Organizational issues                 |      2 |              1 |     0 |
+|---------------------------------------+--------+----------------+-------|
+| Novelty                               |      2 |              1 |     2 |
+|---------------------------------------+--------+----------------+-------|
+| Students                              |      2 |              2 |     2 |
+|---------------------------------------+--------+----------------+-------|
+| *Total*                               |   *15* |           *11* |   *9* |
+|---------------------------------------+--------+----------------+-------|
+
+* Case study 2: final year cryptography
+
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Criterion                             | Mathematica | Maple | GNU Maxima | Axiom | Sage |
+|                                       |     <c>     |  <c>  |    <c>     |  <c>  | <c>  |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Functionality, or fitness for purpose |      2      |   1   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Access                                |      0      |   0   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Cost                                  |      0      |   0   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Teaching & Learning                   |      2      |   2   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Interactivity and user-friendliness   |      2      |   2   |     2      |   1   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Organizational issues                 |      0      |   0   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Novelty                               |      2      |   2   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| Students                              |      2      |   2   |     2      |   2   |  2   |
+|---------------------------------------+-------------+-------+------------+-------+------|
+| *Total*                               |    *10*     |  *9*  |    *16*    | *15*  | *16* |
+|---------------------------------------+-------------+-------+------------+-------+------|
+
+* Some final remarks
+
+#+ATTR_REVEAL: :frag (roll-in)
+- These are not to be construed as definitive
+- Your mileage may vary!
+- This is offered as a method to help *you* decide what CAS would best suit 
+  *your* course and *your* students
+
+- Thank you all!
