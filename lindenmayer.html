@@ -32,8 +32,8 @@
 </section>
 
 <section>
-<section id="slide-orgcbebec0">
-<h2 id="orgcbebec0">What is a Lindenmayer system?</h2>
+<section id="slide-orgbec5b24">
+<h2 id="orgbec5b24">What is a Lindenmayer system?</h2>
 <ul>
 <li class="fragment highlight-current-blue">Designed to explore organic growth</li>
 <li class="fragment highlight-current-blue">Creates complex shapes from simple rules</li>
@@ -55,8 +55,8 @@ we have this string transformation:
 </section>
 </section>
 <section>
-<section id="slide-org5ae6e72">
-<h2 id="org5ae6e72">Fractals: real&#x2026;</h2>
+<section id="slide-orga58b9ee">
+<h2 id="orga58b9ee">Fractals: real&#x2026;</h2>
 
 <div class="figure">
 <p><img src="./Images/trees2.jpg" alt="trees2.jpg" width="1200" />
@@ -71,8 +71,8 @@ All these lovely fractal trees in the city of Melbourne, Australia, in the winte
 </section>
 </section>
 <section>
-<section id="slide-orgec8741a">
-<h2 id="orgec8741a">Fractals are everywhere</h2>
+<section id="slide-orgd5c2d41">
+<h2 id="orgd5c2d41">Fractals are everywhere</h2>
 <p>
 Once you start looking, you can't stop seeing them
 </p>
@@ -94,8 +94,8 @@ Once you start looking, you can't stop seeing them
 </section>
 </section>
 <section>
-<section id="slide-orgcd33a38">
-<h2 id="orgcd33a38">Fractals: manufactured&#x2026;</h2>
+<section id="slide-orgbf26867">
+<h2 id="orgbf26867">Fractals: manufactured&#x2026;</h2>
 
 <div class="figure">
 <p><img src="./Images/agop.jpg" alt="agop.jpg" width="1200" />
@@ -112,8 +112,8 @@ Aristid Lindenmayer and Przemysław Prusinkiewicz, available at
 </section>
 </section>
 <section>
-<section id="slide-orgd1be885">
-<h2 id="orgd1be885">Turning strings of symbols into pictures</h2>
+<section id="slide-org486683f">
+<h2 id="org486683f">Turning strings of symbols into pictures</h2>
 <ul>
 <li>Sets of rules describe how one string of symbols will be expanded to a new string</li>
 <li>Each symbol corresponds to a <i>turtle graphics</i> instruction:
@@ -133,8 +133,8 @@ Aristid Lindenmayer and Przemysław Prusinkiewicz, available at
 </section>
 </section>
 <section>
-<section id="slide-org42c1e41">
-<h2 id="org42c1e41">An example</h2>
+<section id="slide-org4e71d5f">
+<h2 id="org4e71d5f">An example</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 For example, this sequence of symbols:
@@ -173,8 +173,8 @@ In this example, the angle is 26&deg;
 </section>
 </section>
 <section>
-<section id="slide-orgf16bf13">
-<h2 id="orgf16bf13">How turtle graphics works</h2>
+<section id="slide-org30bd263">
+<h2 id="org30bd263">How turtle graphics works</h2>
 <p>
 This shows how the turtle draws a path with branches:
 </p>
@@ -189,8 +189,8 @@ This shows how the turtle draws a path with branches:
 </section>
 </section>
 <section>
-<section id="slide-org09aafb2">
-<h2 id="org09aafb2">More on turtle graphics</h2>
+<section id="slide-orge7befdf">
+<h2 id="orge7befdf">More on turtle graphics</h2>
 <p>
 It's all done from the point of view of the turtle.  A side of <i>Koch's
 snowflake</i> can be computed by the rules:
@@ -205,15 +205,27 @@ The second iteration produces
 </p>
 
 <p>
-<code>F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F</code>
+<span style="background-color: lightgray;">F+F--F+F</span>+<span style="background-color: lightgray;">F+F--F+F</span> <code>--</code>
+<span style="background-color: lightgray;">F+F--F+F</span>+<span style="background-color: lightgray;">F+F--F+F</span>
 </p></li>
 <li><p>
 The third iteration produces:
 </p>
 
 <p>
-<code>F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F+F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F+F+F--F+F+F+F--F+F--F+F--F+F+F+F--F+F</code>
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span> <code>--</code>
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span>+
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span> <code>--</code>
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span> <code>--</code>
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span> <code>--</code>
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span>+
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span> <code>--</code>
+<span style="background-color: lightgray;">F+F--F+F</span> + <span style="background-color: lightgray;">F+F--F+F</span>
 </p></li>
+
+</ul>
+
+<ul>
 <li>and so on&#x2026;</li>
 
 </ul>
@@ -222,8 +234,8 @@ The third iteration produces:
 </section>
 </section>
 <section>
-<section id="slide-org71a6995">
-<h2 id="org71a6995">Turtle graphics <i>with pictures!</i></h2>
+<section id="slide-org1e1296f">
+<h2 id="org1e1296f">Turtle graphics <i>with pictures!</i></h2>
 <div class="column" style="float:left; text-align:right; width:50%">
 <p>
 <br><br>
@@ -249,8 +261,8 @@ Fourth iteration:&nbsp;
 </section>
 </section>
 <section>
-<section id="slide-org8c05a54">
-<h2 id="org8c05a54">Some mathematics</h2>
+<section id="slide-org3d09994">
+<h2 id="org3d09994">Some mathematics</h2>
 <p>
 Remember the <code>F</code> \(\rightarrow\) <code>F+F--F+F</code> iteration?  How many symbols 
 are in the \(n\)<sup>th</sup> string?
@@ -284,8 +296,8 @@ f_n+k_n=4^n+\frac{4}{3}(4^n-1)=\frac{1}{3}(7(4^n)-4).
 </section>
 </section>
 <section>
-<section id="slide-org15183c4">
-<h2 id="org15183c4">The fractal plant in modern languages: Racket</h2>
+<section id="slide-org0f2258c">
+<h2 id="org0f2258c">The fractal plant in modern languages: Racket</h2>
 <p>
 Racket is a modern lisp; descended from Scheme.
 </p>
@@ -314,8 +326,8 @@ Racket is a modern lisp; descended from Scheme.
 </section>
 </section>
 <section>
-<section id="slide-orga2c84d2">
-<h2 id="orga2c84d2">The fractal plant in modern languages: Python</h2>
+<section id="slide-orgadc2a18">
+<h2 id="orgadc2a18">The fractal plant in modern languages: Python</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >import turtle as t  # "turtle" is a turtle graphics module
@@ -343,8 +355,8 @@ def edgetree(level, size, angle):
 </section>
 </section>
 <section>
-<section id="slide-org1226da3">
-<h2 id="org1226da3">Some more mathematics</h2>
+<section id="slide-org090708b">
+<h2 id="org090708b">Some more mathematics</h2>
 <p>
 <i>Fractal dimension</i> can be defined by the "box-counting measure":
 </p>
@@ -372,8 +384,8 @@ In general a fractal will have a non-integer dimension between 1 and 2.
 </section>
 </section>
 <section>
-<section id="slide-orgd2ab1ea">
-<h2 id="orgd2ab1ea">Some concluding remarks</h2>
+<section id="slide-org6e5d100">
+<h2 id="org6e5d100">Some concluding remarks</h2>
 <ul>
 <li>Lindenmayer systems provide a neat, elegant and simple way to explore 
 fractal geometry&hellip;</li>
