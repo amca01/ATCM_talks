@@ -32,8 +32,8 @@
 </section>
 
 <section>
-<section id="slide-org1440041">
-<h2 id="org1440041">Introduction</h2>
+<section id="slide-org90836ad">
+<h2 id="org90836ad">Introduction</h2>
 <ul>
 <li class="fragment roll-in">Carl Gustav Jacobi: "Man muss immer generalisieren": <i>one must always generalize</i></li>
 <li class="fragment roll-in">But generalizing is <i>hard</i></li>
@@ -48,8 +48,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org336a8de">
-<h2 id="org336a8de">Problem 1: crossed ladders</h2>
+<section id="slide-org61d5ede">
+<h2 id="org61d5ede">Problem 1: crossed ladders</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Two ladders of given lengths \(a\) and \(b\) are shown in an alley; the height of
@@ -73,8 +73,8 @@ How wide is the alley?
 </section>
 </section>
 <section>
-<section id="slide-org99d0b24">
-<h2 id="org99d0b24">Solving the crossed ladders</h2>
+<section id="slide-org0c1e9ca">
+<h2 id="org0c1e9ca">Solving the crossed ladders</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Introduce some variables, then by similar triangles we find that
@@ -101,8 +101,8 @@ All we have to do now is to turn this into a polynomial equation in \(x\).
 </section>
 </section>
 <section>
-<section id="slide-org00a67ee">
-<h2 id="org00a67ee">Crossed ladders with a CAS:</h2>
+<section id="slide-org268426b">
+<h2 id="org268426b">Crossed ladders with a CAS:</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >sage: R.&lt;a,b,h,x,A,B,y,z&gt; = PolynomialRing(QQ)
@@ -135,8 +135,8 @@ which is a quartic in \(x^2\).
 </section>
 </section>
 <section>
-<section id="slide-orgf481f0c">
-<h2 id="orgf481f0c">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
+<section id="slide-org093d0e6">
+<h2 id="org093d0e6">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
 <p>
 We can try  a brute force program to look for values which lead to a polynomial 
 which can be factorized:
@@ -198,8 +198,8 @@ We can obtain \(x\) from \(u\).
 </section>
 </section>
 <section>
-<section id="slide-orga9a224e">
-<h2 id="orga9a224e">Generalizing the crossed ladders problem</h2>
+<section id="slide-org921e121">
+<h2 id="org921e121">Generalizing the crossed ladders problem</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Here is where it starts to get messy.  One simple(?) generalization:
@@ -219,8 +219,8 @@ give the ladders a non-zero width
 </section>
 </section>
 <section>
-<section id="slide-org2c003ea">
-<h2 id="org2c003ea">Starting the solution</h2>
+<section id="slide-orge2eed41">
+<h2 id="orge2eed41">Starting the solution</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 As before, introduce some new variables which can be related by
@@ -240,8 +240,8 @@ similar triangles and Pythagoras' theorem:
 </section>
 </section>
 <section>
-<section id="slide-org80bd5e5">
-<h2 id="org80bd5e5">Obtaining the polynomial</h2>
+<section id="slide-org3417923">
+<h2 id="org3417923">Obtaining the polynomial</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >sage: R.&lt;a,b,w,h,x,p,q,r,s,y,z&gt; = PolynomialRing(QQ)
@@ -257,8 +257,8 @@ sage: px = E.gen(0).polynomial(x)
 </section>
 </section>
 <section>
-<section id="slide-orgd397bcd">
-<h2 id="orgd397bcd">This is the polynomial:</h2>
+<section id="slide-orga008818">
+<h2 id="orga008818">This is the polynomial:</h2>
 <div>
 \begin{array}[l]
 (a^4 b^4 w^2 - 2 a^2 b^2 w^6 + w^{10}) x^{12}\\
@@ -495,8 +495,8 @@ There are 523 (<i>five hundred and twenty three</i>) terms in this polynomial!
 </section>
 </section>
 <section>
-<section id="slide-orged1d5b9">
-<h2 id="orged1d5b9">Solving the polynomial</h2>
+<section id="slide-org08b542b">
+<h2 id="org08b542b">Solving the polynomial</h2>
 <p>
 Or rather, trying to find simple versions of it which can be solved.  
 Can this be done?
@@ -531,8 +531,8 @@ x=17500.
 </section>
 </section>
 <section>
-<section id="slide-orgba15aaa">
-<h2 id="orgba15aaa">Further generalizations and questions</h2>
+<section id="slide-org9e810d4">
+<h2 id="org9e810d4">Further generalizations and questions</h2>
 <ul>
 <li class="fragment roll-in">Is there a simple function (like \(u=A+B\)) for which the polynomial is simpler?</li>
 <li class="fragment roll-in">What are the smallest all integer solutions?</li>
@@ -547,8 +547,8 @@ x=17500.
 </section>
 </section>
 <section>
-<section id="slide-orgc14c6b0">
-<h2 id="orgc14c6b0">Problem 2: the ladder in the corner</h2>
+<section id="slide-orgc114535">
+<h2 id="orgc114535">Problem 2: the ladder in the corner</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Two corridors of different widths \(a\) and \(b\) meet at right angles.
@@ -581,8 +581,8 @@ the two positive axes that passes through \((a,b)\).
 </section>
 </section>
 <section>
-<section id="slide-org6dd459d">
-<h2 id="org6dd459d">Solving this problem</h2>
+<section id="slide-orge79341a">
+<h2 id="orge79341a">Solving this problem</h2>
 <p>
 Easy with calculus and a diagram:
 </p>
@@ -605,8 +605,8 @@ which is
 </section>
 </section>
 <section>
-<section id="slide-org5c4e797">
-<h2 id="org5c4e797">Generalizing this corner problem</h2>
+<section id="slide-org9b0b8da">
+<h2 id="org9b0b8da">Generalizing this corner problem</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 As before, consider a non-zero width \(c\).
@@ -649,8 +649,8 @@ A <i>sextic</i> equation, so not in general solvable by radicals.
 </section>
 </section>
 <section>
-<section id="slide-orgdcfe44f">
-<h2 id="orgdcfe44f">Grappling with a sextic equation</h2>
+<section id="slide-orgf96016e">
+<h2 id="orgf96016e">Grappling with a sextic equation</h2>
 <p>
 Maybe we can find values of \(a\), \(b\), \(c\), for which either
 </p>
@@ -673,8 +673,8 @@ group.  However, this polynomial is irreducible:
 </section>
 </section>
 <section>
-<section id="slide-orgcac3fa6">
-<h2 id="orgcac3fa6">Eliminating terms</h2>
+<section id="slide-org212b0cf">
+<h2 id="org212b0cf">Eliminating terms</h2>
 <p>
 Recall that to simplify the general cubic equation
 \[
@@ -770,8 +770,8 @@ we get this lovely polynomial:
 
 <div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
 </section>
-<section id="slide-org9150a42">
-<h3 id="org9150a42">An aside: polynomial resultants</h3>
+<section id="slide-orgb9ee8fd">
+<h3 id="orgb9ee8fd">An aside: polynomial resultants</h3>
 <p>
 The depressed cubic can be obtained as the resultant of
 \[
@@ -880,8 +880,8 @@ S=\begin{bmatrix}
 </section>
 </section>
 <section>
-<section id="slide-org9e119a9">
-<h2 id="org9e119a9">Another tack: factorization</h2>
+<section id="slide-org23d5bd2">
+<h2 id="org23d5bd2">Another tack: factorization</h2>
 <p>
 Leaving out the gory details:
 </p>
@@ -914,36 +914,24 @@ r_4&=-\frac{9n^2+(35-27m^2)n+9m^4-35m^2-288m-5}{18m}
 <section >
 
 <ul>
-<li>Now substitute into equations for coefficients for \(t\) and constant;</li>
+<li>Now substitute into equations for coefficients for \(t\) and constant; 
+and form their resultant.</li>
 
-</ul>
-<p>
-and form their resultant.  
-</p>
-
-<ul>
-<li>Solving low degree factors and we find possible values:</li>
-
-</ul>
-<p>
+<li>Solving low degree factors and we find possible values:
 \[
-m=2\sqrt{5}+5,\; n=-\frac{5^{3/2}}{3},\; r_4=-\frac{2\sqrt{5}+5}{3\sqrt{5}}
-\]
-</p>
+  m=2\sqrt{5}+5,\; n=-\frac{5^{3/2}}{3},\; r_4=-\frac{2\sqrt{5}+5}{3\sqrt{5}}
+  \]</li>
 
-<ul>
-<li>Now solve</li>
-
-</ul>
-<p>
+<li>Now solve
 \[
-t^3+mt^2+nt+r_4=0
-\]
+  t^3+mt^2+nt+r_4=0
+  \]
 which is
 \[
-t^3+(2\sqrt{5}+5)t^2-\frac{5^{3/2}}{3}t-\frac{2\sqrt{5}+5}{3\sqrt{5}}=0
-\]
-</p>
+  t^3+(2\sqrt{5}+5)t^2-\frac{5^{3/2}}{3}t-\frac{2\sqrt{5}+5}{3\sqrt{5}}=0
+  \]</li>
+
+</ul>
 
 </section>
 <section >
@@ -953,7 +941,7 @@ The real solution is
 </p>
 <div>
 \begin{array}[rl]
-  t=&\dfrac{5^{3/2}}{9}+\dfrac{\left(729(2^{3/2})\,
+  {}t=&\dfrac{5^{3/2}}{9}+\dfrac{\left(729(2^{3/2})\,
  \sqrt{901\,\sqrt{5}+2041}-266(3^{7/2})\,\sqrt{5}-22(3^{
    15/2})\right)^{1/3}}{3^{19/6}}\\
    &\quad-\dfrac{2^{2/3}(27\sqrt{5}+5)}
@@ -974,8 +962,8 @@ A triumph for computer algebra and <i>really complicated</i> algebraic expressio
 </section>
 </section>
 <section>
-<section id="slide-orgaa2d95e">
-<h2 id="orgaa2d95e">Where to from here?</h2>
+<section id="slide-org9b2768c">
+<h2 id="org9b2768c">Where to from here?</h2>
 <p>
 Further generalizations include:
 </p>
