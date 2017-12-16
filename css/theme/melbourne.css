@@ -77,7 +77,10 @@ body.dark .reveal h6 {
     word-wrap: break-word; }
 
 .reveal h1 {
-    font-size: 1.77em;}
+    font-size: 1.77em;
+    font-weight: bold;
+    color: DarkSlateBlue;
+}
 
 .reveal h2 {
     font-size: 1.30em;
@@ -86,7 +89,10 @@ body.dark .reveal h6 {
 }
 
 .reveal h3 {
-    font-size: .95em; }
+    font-size: .95em; 
+    font-weight: bold;
+    color: DarkSlateBlue;
+}
 
 .reveal h4 {
     font-size: .75em; }

@@ -32,8 +32,8 @@
 </section>
 
 <section>
-<section id="slide-org15e0c03">
-<h2 id="org15e0c03">Introduction</h2>
+<section id="slide-org1440041">
+<h2 id="org1440041">Introduction</h2>
 <ul>
 <li class="fragment roll-in">Carl Gustav Jacobi: "Man muss immer generalisieren": <i>one must always generalize</i></li>
 <li class="fragment roll-in">But generalizing is <i>hard</i></li>
@@ -48,8 +48,8 @@
 </section>
 </section>
 <section>
-<section id="slide-org2801d3a">
-<h2 id="org2801d3a">Problem 1: crossed ladders</h2>
+<section id="slide-org336a8de">
+<h2 id="org336a8de">Problem 1: crossed ladders</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Two ladders of given lengths \(a\) and \(b\) are shown in an alley; the height of
@@ -73,8 +73,8 @@ How wide is the alley?
 </section>
 </section>
 <section>
-<section id="slide-orgf78ca59">
-<h2 id="orgf78ca59">Solving the crossed ladders</h2>
+<section id="slide-org99d0b24">
+<h2 id="org99d0b24">Solving the crossed ladders</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Introduce some variables, then by similar triangles we find that
@@ -101,8 +101,8 @@ All we have to do now is to turn this into a polynomial equation in \(x\).
 </section>
 </section>
 <section>
-<section id="slide-org7de448b">
-<h2 id="org7de448b">Crossed ladders with a CAS:</h2>
+<section id="slide-org00a67ee">
+<h2 id="org00a67ee">Crossed ladders with a CAS:</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >sage: R.&lt;a,b,h,x,A,B,y,z&gt; = PolynomialRing(QQ)
@@ -135,8 +135,8 @@ which is a quartic in \(x^2\).
 </section>
 </section>
 <section>
-<section id="slide-org90dd83c">
-<h2 id="org90dd83c">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
+<section id="slide-orgf481f0c">
+<h2 id="orgf481f0c">Exploring: what values of \(a\), \(b\) and \(h\) lead to nice solutions?</h2>
 <p>
 We can try  a brute force program to look for values which lead to a polynomial 
 which can be factorized:
@@ -198,8 +198,8 @@ We can obtain \(x\) from \(u\).
 </section>
 </section>
 <section>
-<section id="slide-orgb9115dc">
-<h2 id="orgb9115dc">Generalizing the crossed ladders problem</h2>
+<section id="slide-orga9a224e">
+<h2 id="orga9a224e">Generalizing the crossed ladders problem</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Here is where it starts to get messy.  One simple(?) generalization:
@@ -219,8 +219,8 @@ give the ladders a non-zero width
 </section>
 </section>
 <section>
-<section id="slide-org37b02dc">
-<h2 id="org37b02dc">Starting the solution</h2>
+<section id="slide-org2c003ea">
+<h2 id="org2c003ea">Starting the solution</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 As before, introduce some new variables which can be related by
@@ -240,8 +240,8 @@ similar triangles and Pythagoras' theorem:
 </section>
 </section>
 <section>
-<section id="slide-orgcd856ed">
-<h2 id="orgcd856ed">Obtaining the polynomial</h2>
+<section id="slide-org80bd5e5">
+<h2 id="org80bd5e5">Obtaining the polynomial</h2>
 <div class="org-src-container">
 
 <pre><code class="Python" >sage: R.&lt;a,b,w,h,x,p,q,r,s,y,z&gt; = PolynomialRing(QQ)
@@ -257,8 +257,8 @@ sage: px = E.gen(0).polynomial(x)
 </section>
 </section>
 <section>
-<section id="slide-orge260fb3">
-<h2 id="orge260fb3">This is the polynomial:</h2>
+<section id="slide-orgd397bcd">
+<h2 id="orgd397bcd">This is the polynomial:</h2>
 <div>
 \begin{array}[l]
 (a^4 b^4 w^2 - 2 a^2 b^2 w^6 + w^{10}) x^{12}\\
@@ -495,8 +495,8 @@ There are 523 (<i>five hundred and twenty three</i>) terms in this polynomial!
 </section>
 </section>
 <section>
-<section id="slide-org89cfc1c">
-<h2 id="org89cfc1c">Solving the polynomial</h2>
+<section id="slide-orged1d5b9">
+<h2 id="orged1d5b9">Solving the polynomial</h2>
 <p>
 Or rather, trying to find simple versions of it which can be solved.  
 Can this be done?
@@ -531,8 +531,8 @@ x=17500.
 </section>
 </section>
 <section>
-<section id="slide-orge22e4f5">
-<h2 id="orge22e4f5">Further generalizations and questions</h2>
+<section id="slide-orgba15aaa">
+<h2 id="orgba15aaa">Further generalizations and questions</h2>
 <ul>
 <li class="fragment roll-in">Is there a simple function (like \(u=A+B\)) for which the polynomial is simpler?</li>
 <li class="fragment roll-in">What are the smallest all integer solutions?</li>
@@ -547,8 +547,8 @@ x=17500.
 </section>
 </section>
 <section>
-<section id="slide-orgf18fecc">
-<h2 id="orgf18fecc">Problem 2: the ladder in the corner</h2>
+<section id="slide-orgc14c6b0">
+<h2 id="orgc14c6b0">Problem 2: the ladder in the corner</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 Two corridors of different widths \(a\) and \(b\) meet at right angles.
@@ -581,8 +581,8 @@ the two positive axes that passes through \((a,b)\).
 </section>
 </section>
 <section>
-<section id="slide-org64b100f">
-<h2 id="org64b100f">Solving this problem</h2>
+<section id="slide-org6dd459d">
+<h2 id="org6dd459d">Solving this problem</h2>
 <p>
 Easy with calculus and a diagram:
 </p>
@@ -605,8 +605,8 @@ which is
 </section>
 </section>
 <section>
-<section id="slide-org50c0c83">
-<h2 id="org50c0c83">Generalizing this corner problem</h2>
+<section id="slide-org5c4e797">
+<h2 id="org5c4e797">Generalizing this corner problem</h2>
 <div class="column" style="float:left; width:50%">
 <p>
 As before, consider a non-zero width \(c\).
@@ -649,8 +649,8 @@ A <i>sextic</i> equation, so not in general solvable by radicals.
 </section>
 </section>
 <section>
-<section id="slide-orgdda3973">
-<h2 id="orgdda3973">Grappling with a sextic equation</h2>
+<section id="slide-orgdcfe44f">
+<h2 id="orgdcfe44f">Grappling with a sextic equation</h2>
 <p>
 Maybe we can find values of \(a\), \(b\), \(c\), for which either
 </p>
@@ -673,8 +673,8 @@ group.  However, this polynomial is irreducible:
 </section>
 </section>
 <section>
-<section id="slide-org17a6bbe">
-<h2 id="org17a6bbe">Eliminating terms</h2>
+<section id="slide-orgcac3fa6">
+<h2 id="orgcac3fa6">Eliminating terms</h2>
 <p>
 Recall that to simplify the general cubic equation
 \[
@@ -770,10 +770,118 @@ we get this lovely polynomial:
 
 <div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
 </section>
+<section id="slide-org9150a42">
+<h3 id="org9150a42">An aside: polynomial resultants</h3>
+<p>
+The depressed cubic can be obtained as the resultant of
+\[
+x^3+ax^2+bx+c,\quad x = y+p
+\]
+</p>
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: L = x^3+a*x^2+b*x+c   
+sage: LR = L.resultant(x-y-p,x)
+sage: Ly = L.resultant(x-p*y-q,x).poly(y)
+</code></pre>
+</div>
+<p>
+which gives
+\[
+L_y = y^3+(a+3p)y^2+(2ap + 3p^2 + b)y+p^3 + ap^2+bp + c.
+\]
+This means we require
+\[
+a+3p=0\Rightarrow x = y-\frac{a}{3}
+\]
+to eliminate the square term.
+</p>
+
+</section>
+<section >
+
+<p>
+We can attempt to eliminate <i>two</i> terms by finding the resultant of
+\[
+x^3+ax^2+bx+c,\quad y=x^2+px+q
+\]
+</p>
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: L = x^3+a*x^2+b*x+c   
+sage: LR = L.resultant(y-x^2-p*x-q,x)
+sage: Ly = LR.poly(y)
+</code></pre>
+</div>
+
+<div>
+\begin{split}
+y^3+(-a^2 + ap + 2b - 3q)y^2+
+(-abp + bp^2 - 2apq + b^2 - 2ac + 3cp + 2(a^2 - 2b)q + 3q^2)y\\
+-acp^2 + cp^3 + abpq - bp^2q + apq^2 + bcp - 3cpq - (a^2 - 2b)q^2 - q^3 - c^2 - (b^2 - 2ac)q
+\end{split}
+
+</div>
+
+</section>
+<section >
+
+<p>
+Make coefficients of \(y\) and \(y^2\) zero:
+</p>
+<div class="org-src-container">
+
+<pre><code class="Python" >sage: solve([Ly.coefficient(y),Ly.coefficient(y^2)],p,q)
+</code></pre>
+</div>
+
+<div>
+\begin{align*}
+p &= \frac{2 \, a^{3} - 7 \, a b + 9 \, c + \sqrt{-3 \, a^{2} b^{2} + 12 \, b^{3} + 6 \, {\left(2 \, a^{3} - 9 \, a b\right)} c + 81 \, c^{2}}}{2 \, {\left(a^{2} - 3 \, b\right)}}\\
+q &= \frac{3 \, a^{2} b - 12 \, b^{2} + 9 \, a c + \sqrt{-3 \, a^{2} b^{2} + 12 \, b^{3} + 6 \, {\left(2 \, a^{3} - 9 \, a b\right)} c + 81 \, c^{2}} a}{6 \, {\left(a^{2} - 3 \, b\right)}}
+\end{align*}
+
+</div>
+<p>
+or
+</p>
+<div>
+\begin{align*}
+p &= \frac{2 \, a^{3} - 7 \, a b + 9 \, c - \sqrt{-3 \, a^{2} b^{2} + 12 \, b^{3} + 6 \, {\left(2 \, a^{3} - 9 \, a b\right)} c + 81 \, c^{2}}}{2 \, {\left(a^{2} - 3 \, b\right)}}\\
+q &= \frac{3 \, a^{2} b - 12 \, b^{2} + 9 \, a c - \sqrt{-3 \, a^{2} b^{2} + 12 \, b^{3} + 6 \, {\left(2 \, a^{3} - 9 \, a b\right)} c + 81 \, c^{2}} a}{6 \, {\left(a^{2} - 3 \, b\right)}}
+\end{align*}
+
+</div>
+
+</section>
+<section >
+
+<p>
+The resultant can be obtained as the determinant of the <i>Sylvester
+matrix</i> whose rows are the shifted coefficients of the polynomials
+\[
+x^3+ax^2+bx+c,\quad y-x^2-px-q = -x^2-px+(y-q):
+\]
+</p>
+
+<p>
+\[ 
+S=\begin{bmatrix}
+1&a&b&c&0\\
+0&1&a&b&c\\
+-1&-p&y-q&0&0\\
+0&-1&-p&y-q&0\\
+0&0&-1&-p&y-q
+\end{bmatrix}
+\]
+</p>
+
+<div class="slide-footer">Ladder problems: Alasdair McAndrew, ATCM2017</div>
+</section>
 </section>
 <section>
-<section id="slide-org554fd86">
-<h2 id="org554fd86">Another tack: factorization</h2>
+<section id="slide-org9e119a9">
+<h2 id="org9e119a9">Another tack: factorization</h2>
 <p>
 Leaving out the gory details:
 </p>
@@ -866,8 +974,8 @@ A triumph for computer algebra and <i>really complicated</i> algebraic expressio
 </section>
 </section>
 <section>
-<section id="slide-org5179c04">
-<h2 id="org5179c04">Where to from here?</h2>
+<section id="slide-orgaa2d95e">
+<h2 id="orgaa2d95e">Where to from here?</h2>
 <p>
 Further generalizations include:
 </p>
